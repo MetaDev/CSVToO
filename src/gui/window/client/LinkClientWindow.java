@@ -27,7 +27,7 @@ import webcomm.octws.RelationServiceData;
  * panel that show, in a clear way, all cached clients
  * that can be used to link with the import client
  */
-public class ExistingClientWindow extends JPanel {
+public class LinkClientWindow extends JPanel {
 
 	private Map<String, RelationServiceData> sortedClientMapping;
 

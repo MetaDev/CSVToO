@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+
 import model.CacheModel;
+
 import webcomm.octws.BookyearServiceData;
 import webcomm.octws.JournalServiceData;
 import webcomm.octws.OctopusWS;
@@ -36,6 +38,7 @@ public class WSACache1 extends WSAcces {
 		for (RelationServiceData relation : webService.getRelations()) {
 			if (relation.isClient()) {
 				octClients.add(relation);
+
 			}
 		}
 		CacheModel.setOctClients(octClients);

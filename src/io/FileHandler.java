@@ -2,14 +2,16 @@ package io;
 
 import java.awt.FileDialog;
 import java.awt.Frame;
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,6 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class FileHandler {
-	private static String configPath="./config";
 	public static void overwriteFile(String filename, String text) {
 		FileOutputStream fos = null;
 		try {
@@ -41,35 +42,36 @@ public class FileHandler {
 		}
 	}
 
-	private static InputStream getInputStream(String path) {
-		System.out.println(path);
-		return FileHandler.class.getClassLoader().getResourceAsStream(path);
-	}
+	public static boolean skipToShortLines = true;
+	public static int headerLinesSkipped = 1;
 
-	// private static OutputStream getOutpuStream(String path){
-	// return FileHandler.class.getClassLoader()
-	// .getResourceAsStream(path);
-	// }
 	public static List<String[]> parseCSV(String fileName, char seperator,
-			char quote, int headerLinesSkipped, boolean skipTooShortLines) {
+			char quote) {
 
 		try {
 			// , is seperator and " is quote by default
 			CSVReader reader = new CSVReader(new InputStreamReader(
-					new FileInputStream(fileName), "UTF-8"), seperator, quote,
-					headerLinesSkipped);
+					new FileInputStream(fileName), "UTF-8"), seperator, quote);
 			List<String[]> list = new ArrayList<>();
 			int nrOfFields = 0;
+			int row = 0;
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
-				// take the number of fields in the first line as indicator
-				if (nrOfFields == 0)
-					nrOfFields = nextLine.length;
-				// add line if you don't skip lines or if the line has the
-				// correct length
-				if (!skipTooShortLines || nextLine.length == nrOfFields) {
-					list.add(nextLine);
+				// skip first n lines
+				if (row >= headerLinesSkipped) {
+
+					// take the number of fields in the first line as indicator
+					if (nrOfFields == 0)
+						nrOfFields = nextLine.length;
+					// add line if you don't skip lines or if the line has the
+					// correct length
+					if (!FileHandler.skipToShortLines
+							|| nextLine.length == nrOfFields) {
+						list.add(nextLine);
+					}
+
 				}
+				row++;
 
 			}
 			reader.close();
@@ -82,8 +84,58 @@ public class FileHandler {
 		return null;
 	}
 
+	/*
+	 * parse csv without quotes only works for unquoted single line csv files
+	 */
+	public static List<String[]> parseCSV(String fileName, String seperator) {
+		BufferedReader in = null;
+		List<String[]> list = new ArrayList<>();
+		try {
+			in = new BufferedReader(new InputStreamReader(new FileInputStream(
+					fileName), "UTF8"));
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String str;
+		int row = 0;
+		int nrOfFields = 0;
+		String[] line;
+		try {
+			while ((str = in.readLine()) != null) {
+				// skip first n lines
+				if (row >= headerLinesSkipped) {
+					// split line on ;
+					line = str.split(seperator);
+					// take the number of fields in the first line as indicator
+					System.out.println(nrOfFields);
+					if (nrOfFields == 0)
+						nrOfFields = line.length;
+					// add line if you don't skip lines or if the line has the
+					// correct length
+					if (!FileHandler.skipToShortLines
+							|| line.length == nrOfFields) {
+						list.add(line);
+					}
+				}
+				row++;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	public static List<String[]> parseCSV(String fileName) {
-		return parseCSV(fileName, ',', '\"', 1, true);
+		return parseCSV(fileName, ";");
 	}
 
 	public static void writeCSV(String fileName, List<String[]> lines,
@@ -106,6 +158,10 @@ public class FileHandler {
 		for (String[] line : csv) {
 			map.put(line[0], line[1]);
 		}
+	}
+
+	public static List<String[]> parseCSVCommaAndQuotes(String fileName) {
+		return parseCSV(fileName, ',', '"');
 	}
 
 	public static void flushCSVMapping(Map<String, String> map,

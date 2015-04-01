@@ -75,11 +75,12 @@ public class LoginWindow extends JPanel {
 		if (!new ChooseBookYearJournalWindow().open(parent)) {
 			return false;
 		}
-		// second round of caching after receiving necessary info
+		//second round of caching after receiving necessary info
 		WSCommunicator.executeWithAlert(parent, port, WSACache2.getInstance());
-
+		
 		return true;
 
 	}
 
+	
 }

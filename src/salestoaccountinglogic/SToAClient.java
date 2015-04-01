@@ -2,6 +2,7 @@ package salestoaccountinglogic;
 
 import fr.marcwrobel.jbanking.bic.Bic;
 import fr.marcwrobel.jbanking.iban.Iban;
+import gui.component.custom.OKNotificationWindow;
 import io.FileHandler;
 
 import java.util.Collection;
@@ -13,17 +14,18 @@ import java.util.Set;
 
 import model.AppConstants;
 import model.CacheModel;
+import model.ConflictTabelRow;
 import util.AppUtil;
 
 import webcomm.octws.RelationServiceData;
 
 public class SToAClient {
 	// key is Import id , value Octopus external id
-	private static Map<String, String> clientsMapping = new HashMap<>();
+	public static Map<String, String> clientsMapping = new HashMap<>();
 	// key is Import id , value Octopus external id
-	private static Map<String, String> newClientsMapping = new HashMap<>();
+	public static Map<String, String> newClientsMapping = new HashMap<>();
 
-	private static Set<RelationServiceData> allClients = new HashSet<>();
+	public static Set<RelationServiceData> allClients = new HashSet<>();
 
 	// new clients, to be used when uploading
 	private static Set<RelationServiceData> newOrEditedClients = new HashSet<>();
@@ -74,15 +76,11 @@ public class SToAClient {
 		if (isPrivate(VATnr))
 			return null;
 		for (RelationServiceData client : allClients) {
-			if (VATnr.equals(SToAField.removeDots(client.getVatNr()))) {
+			if (VATnr.equals(SToAField.removeBTWFormatting(client.getVatNr()))) {
 				return client;
 			}
 		}
 		return null;
-	}
-
-	public static boolean isPrivate(String VATnr) {
-		return AppConstants.particulierCode.equals(VATnr);
 	}
 
 	/*
@@ -92,8 +90,12 @@ public class SToAClient {
 		Set<RelationServiceData> clientsWithoutExtID = new HashSet<>();
 		// seperate clients with and without ext ID
 		for (RelationServiceData client : clients) {
+
 			if (client.getExternalRelationNr() == 0) {
 				clientsWithoutExtID.add(client);
+				// should the client contain null data this method will fix such
+				// that its uploadable
+				SToAClient.fixUnUploadableClient(client);
 			} else {
 				addCachedClient(client);
 			}
@@ -123,6 +125,41 @@ public class SToAClient {
 	}
 
 	/*
+	 * some client have no country code or miss some address data, this method
+	 * replaces the null data with empty string these clients can't be used to
+	 * link they don't contain correct data. It's just to allow the upload of
+	 * clients.
+	 */
+	// TODO maybe find country code based on import or vat number
+	//return which field was wrong in string
+	public static String fixUnUploadableClient(RelationServiceData client) {
+		if (client.getCity() == null) {
+			client.setCity("");
+		}
+		if (client.getCountry() == null) {
+			client.setCountry("");
+		}
+		if (client.getPostalCode() == null) {
+			client.setPostalCode("");
+		}
+		if (client.getStreetAndNr() == null) {
+			client.setStreetAndNr("");
+		}
+		return "";
+	}
+
+	public static void completeUnvalidClient(RelationServiceData client,
+			ConflictTabelRow row) {
+		if (!SToAField.isCountryCode(client.getCountry())) {
+			client.setCountry(row.getClientField(ClientFields.LandCode));
+			OKNotificationWindow.openWarning("Invalid country code is fixed, based on import line.");
+		}
+		OKNotificationWindow.openWarning("No fixable invalid field found");
+		//TODO autocomple vat number too
+		//complete all mandatory fields if possible
+	}
+
+	/*
 	 * When adding new client this method is used to retrieve a valid extID
 	 */
 	public static int getValidExternalID() {
@@ -141,22 +178,23 @@ public class SToAClient {
 
 	public static boolean clientIsValid(RelationServiceData client) {
 		// check Octopusexternalid, VATNR,CountryCode,IBanNr,BicCode
-		if (!fieldIsValid(ClientFields.OctopusExternalID,
+		if (!fieldIsValid(client, ClientFields.OctopusExternalID,
 				client.getExternalRelationNr() + "")) {
 			return false;
 		}
 		// an Octopus relation object returns a formatted VAT nr
-		if (!fieldIsValid(ClientFields.BTWNummer,
+		if (!fieldIsValid(client, ClientFields.BTWNummer,
 				SToAField.removeDots(client.getVatNr()))) {
 			return false;
 		}
-		if (!fieldIsValid(ClientFields.LandCode, client.getCountry())) {
+		if (!fieldIsValid(client, ClientFields.LandCode, client.getCountry())) {
 			return false;
 		}
-		if (!fieldIsValid(ClientFields.IBANNummer, client.getIbanAccountNr())) {
+		if (!fieldIsValid(client, ClientFields.IBANNummer,
+				client.getIbanAccountNr())) {
 			return false;
 		}
-		if (!fieldIsValid(ClientFields.BICCODE, client.getBicCode())) {
+		if (!fieldIsValid(client, ClientFields.BICCODE, client.getBicCode())) {
 			return false;
 		}
 		return true;
@@ -164,9 +202,9 @@ public class SToAClient {
 
 	public static void init() {
 		// build client mapping
-		List<String[]> clientMapLines = FileHandler.parseCSV(AppUtil
-				.mergeFolderAndFileName(AppConstants.clientMapFile,
-						AppConstants.configDir));
+		List<String[]> clientMapLines = FileHandler
+				.parseCSVCommaAndQuotes(AppUtil.mergeFolderAndFileName(
+						AppConstants.clientMapFile, AppConstants.configDir));
 		FileHandler.cacheCSVMapping(clientMapLines, clientsMapping);
 
 	}
@@ -216,12 +254,56 @@ public class SToAClient {
 		return toUploadRelation;
 	}
 
-	
+	public static Map<String, String> getClientsMapping() {
+		return clientsMapping;
+	}
+
 	// all mapped clients are saved in map so overwrite
 	public static void saveAllLinkedClients() {
 		FileHandler.flushCSVMapping(clientsMapping, new String[] { "ClientID",
 				"OctopusExternalClientID" }, AppUtil.mergeFolderAndFileName(
 				AppConstants.clientMapFile, AppConstants.configDir));
+	}
+
+	// return wether a client is private or corporate
+	public static boolean isPrivate(RelationServiceData client) {
+		return client.getName().startsWith(AppConstants.particulierCode);
+	}
+
+	// return wether a client is private or corporate
+	public static boolean isPrivate(String clientCode) {
+		return clientCode.startsWith(AppConstants.particulierCode);
+	}
+
+	// use to validate a client after change is made in the edit window
+	public static boolean fieldIsValid(RelationServiceData client,
+			ClientFields field, String s) {
+		// the client is private if it's names starts with the private
+		// code
+		if (client.getName().startsWith(AppConstants.particulierCode)) {
+			switch (field) {
+			case BTWNummer:
+				return true;
+			}
+		}
+
+		switch (field) {
+		case OctopusExternalID:
+			return (SToAField.isInteger(s)) && SToAField.isNotOptional(s);
+		case BTWNummer:
+			return (SToAField.isBTWNumber(s)) && SToAField.isNotOptional(s);
+		case NrOfExperitiationDays:
+			return (SToAField.isInteger(s)) && SToAField.isNotOptional(s);
+		case LandCode:
+			return SToAField.isCountryCode(s) || !SToAField.isNotOptional(s);
+		case IBANNummer:
+			return Iban.isValid(s) || !SToAField.isNotOptional(s);
+		case BICCODE:
+			return Bic.isValid(s) || !SToAField.isNotOptional(s);
+		default:
+			return true;
+		}
+
 	}
 
 	// used in edit client window

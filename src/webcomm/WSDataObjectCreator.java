@@ -64,7 +64,6 @@ public class WSDataObjectCreator {
 		booking.getBookingLines().add(line);
 
 		// update the total amount of the booking
-		// round the vat amount to 2 numbers after comma
 		if (isCreditNote) {
 			booking.setAmount(booking.getAmount()
 					- (line.getBaseAmount() + line.getVatAmount()));
@@ -73,7 +72,7 @@ public class WSDataObjectCreator {
 					+ (line.getBaseAmount() + line.getVatAmount()));
 		}
 	}
-	
+
 	public static BuySellBookingLineServiceData getBookingLine(int accountKey,
 			double baseAmount, double vatAmount, String vatCodeKey,
 			String Comment) {
@@ -127,7 +126,7 @@ public class WSDataObjectCreator {
 		relation.setCity(city);
 		relation.setCountry(countryCode);
 
-		// Bepaal of de relatie klant en/of leverancier is. Ten minste een van
+		// Bepaal of de relatie klant en/of leverancier is. Ten minste ��n van
 		// beide moet true zijn
 		relation.setClient(true);
 		relation.setSupplier(false);

@@ -3,7 +3,6 @@ package webcomm;
 import gui.component.custom.OKNotificationWindow;
 import gui.window.main.MainWindow;
 import model.FlushModel;
-import salestoaccountinglogic.SToAClient;
 import util.AppUtil;
 
 import webcomm.octws.BuySellBookingServiceData;
@@ -36,9 +35,7 @@ public class WSAFlush extends WSAcces {
 		// send all correct, processed data to Octopus
 
 		// first linked and modified relations
-
-		for (RelationServiceData relation : SToAClient
-				.getToUploadValidRelations()) {
+		for (RelationServiceData relation : FlushModel.getToUploadClienst()) {
 			if (!error) {
 				int returnValue = webService.insertUpdateRelation(relation);
 				// error
@@ -47,9 +44,10 @@ public class WSAFlush extends WSAcces {
 							.openError("Something went wrong when adding client: "
 									+ webService
 											.getErrorDescription(returnValue)
+									+ "\n"
 									+ "Please search upload list of new clients and look for clients with null in the adress or other fields,\n"
 									+ " edit those clients through the recently edited clients window.\n"
-									+ "client: \n"
+									+ "\n client: "
 									+ AppUtil.printRelation(relation)
 									+ "\nA new log file has been created with all data concerning the upload error.\n"
 									+ "Your Octopus account will not suffer from inconsistent data.\n"
@@ -87,7 +85,8 @@ public class WSAFlush extends WSAcces {
 					// caused
 					// the error in a log file
 					logText += "------------------------------------------------------\n";
-					logText += webService.getErrorDescription(returnValue);
+					logText += webService.getErrorDescription(returnValue)
+							+ "\n";
 					logText += "Error log, created upon failing of uploading this booking:\n";
 					error = true;
 				}
@@ -99,12 +98,11 @@ public class WSAFlush extends WSAcces {
 			AppUtil.saveToLog(logText);
 			return null;
 		} else {
-			// show window, upload complete, please close application
 			OKNotificationWindow
-					.openWarning("The upload was successful.\nThe application will close.");
+					.openError("The upload was successful.\nPLease close application.");
 			MainWindow.close();
-
 		}
+
 		return null;
 	}
 }

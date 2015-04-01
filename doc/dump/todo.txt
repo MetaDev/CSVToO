@@ -1,6 +1,25 @@
-voor paul
+voor paul en gaut
+
+spaties in landcode-> invalid client 
+data from new client is parsed from import
+particulie btw is not unique for
+verander tekst bij upload, verwijder permanent
+system exit na dialoog 
+add date to log file
 
 
+remove rows intable
+
+-manual updaten:
+
+
+
+-client window generiek maken: combobox voor facturatie type, periode laten kiezen(suggestie)
+-probeer om zoveel mogelijk import specifieke code te groeperen
+-maak het generiek
+-use vat number as unique import ID (optional)
+-als klaar voor paul is de volgende stap een generieke oplossing:het parsen van csv met autosuggestie, mapping en andere
+met veld validatie van het formaat: double,int,date, btw number, alpha(numeric) (unique), price with currency
 -nieuwe klant suggestie wanneer er geen btw nr is
 
 -integreren nieuwe webservice

@@ -75,7 +75,8 @@ public class AppUtil {
 		bookingDescription += "date: "
 				+ printXMLCalendar(booking.getDocumentDate())
 				+ "; expiry date: " + printXMLCalendar(booking.getExpiryDate())
-				+ " perdiod: " + booking.getBookyearPeriodeNr() + '\n';
+				+ " period: " + booking.getBookyearPeriodeNr() + '\n';
+		bookingDescription += "comment: " + booking.getComment() + '\n';
 		bookingDescription += "reference: " + booking.getReference() + '\n';
 		bookingDescription += "total amount: "
 				+ printAmountEuro(booking.getAmount()) + "\n\n";
@@ -110,22 +111,24 @@ public class AppUtil {
 	}
 
 	public static String printAllBookings(String header,
-			List<BuySellBookingServiceData> toPrintBookings) {
-		String bookingsInText=header;
+			Collection<BuySellBookingServiceData> toPrintBookings) {
+		String bookingsInText = header;
 		for (BuySellBookingServiceData booking : toPrintBookings) {
 			bookingsInText += AppUtil.printBooking(booking);
 		}
 		return bookingsInText;
 	}
+
 	public static String printAllClients(String header,
-			Collection<RelationServiceData> toPrintRelations){
-		String relationsInText=header;
-		for (RelationServiceData relation : new ArrayList<>(toPrintRelations)) {
+			Collection<RelationServiceData> toPrintRelations) {
+		String relationsInText = header;
+		for (RelationServiceData relation : toPrintRelations) {
 			relationsInText += AppUtil.printRelation(relation);
 		}
 		return relationsInText;
 	}
-	public static void saveToLog(String message){
+
+	public static void saveToLog(String message) {
 		String logText = new Date().toString() + message;
 		FileHandler.appendToFile(AppUtil.mergeFolderAndFileName(
 				AppConstants.logFile, AppConstants.logDir), logText);

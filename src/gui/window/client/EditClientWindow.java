@@ -1,8 +1,9 @@
 package gui.window.client;
 
 import gui.component.custom.ClientInputField;
-import gui.component.custom.OKNotificationWindow;
 import gui.component.custom.LabeledComboBox;
+import gui.component.custom.OKCancelNotificationWindow;
+import gui.component.custom.OKNotificationWindow;
 
 import java.awt.GridLayout;
 import java.util.HashMap;
@@ -78,13 +79,16 @@ public class EditClientWindow extends JPanel {
 		// Country Code
 		add(buildInputField("Land Code", client.getCountry(),
 				ClientFields.LandCode));
-		// BTWNR
-		add(buildInputField("BTW Nummer",
-				SToAField.removeDots(client.getVatNr()), ClientFields.BTWNummer));
+		if (!SToAClient.isPrivate(client)) {
+			// BTWNR
+			add(buildInputField("BTW Nummer",
+					SToAField.removeDots(client.getVatNr()),
+					ClientFields.BTWNummer));
+		}
+
 		// nr of experiationDays
 		add(buildInputField("Aantal Vervaldagen", client.getExpirationDays()
 				+ "", ClientFields.NrOfExperitiationDays));
-		add(new JLabel());
 
 		// Booking account
 
@@ -118,16 +122,11 @@ public class EditClientWindow extends JPanel {
 		add(new JLabel("Factuur Verval Type: Na facturatie"));
 
 		// External ID
-		if (client.getExternalRelationNr() == 0) {
-			add(new JLabel(
-					"<html>External Octopus ID: <font color='red'>0</font></html>"));
-		} else {
-			add(new JLabel("External Octopus ID: "
-					+ client.getExternalRelationNr()));
-		}
-
-		// add empty label to align components
-		add(new JLabel());
+		ClientInputField fieldExtID = buildInputField("External ID",
+				client.getExternalRelationNr() + "",
+				ClientFields.OctopusExternalID);
+		fieldExtID.getTextField().setEditable(false);
+		add(fieldExtID);
 
 		// optional
 		// IBAN
@@ -156,7 +155,10 @@ public class EditClientWindow extends JPanel {
 		client.setCountry(inputClientFields.get(ClientFields.LandCode)
 				.getText());
 		// BTWNr
-		client.setVatNr(inputClientFields.get(ClientFields.BTWNummer).getText());
+		if (!SToAClient.isPrivate(client)) {
+			client.setVatNr(inputClientFields.get(ClientFields.BTWNummer)
+					.getText());
+		}
 		// IBAN
 		client.setIbanAccountNr(inputClientFields.get(ClientFields.IBANNummer)
 				.getText());
@@ -165,11 +167,8 @@ public class EditClientWindow extends JPanel {
 
 		// nr of experiationDays
 		// only parse number if not empty
-		if (!inputClientFields.get(ClientFields.NrOfExperitiationDays)
-				.getText().equals("")) {
-			client.setExpirationDays(Integer.parseInt(inputClientFields.get(
-					ClientFields.NrOfExperitiationDays).getText()));
-		}
+		client.setExpirationDays(Integer.parseInt(inputClientFields.get(
+				ClientFields.NrOfExperitiationDays).getText()));
 		// BTW plichtigheid
 		client.setVatType(Integer.parseInt(SToAField
 				.getVATLiabilityCodeByname((String) comboBoxClientFields.get(
@@ -202,11 +201,10 @@ public class EditClientWindow extends JPanel {
 			// check if client with new saved data is valid
 			if (!SToAClient.clientIsValid(client)) {
 				OKNotificationWindow
-						.openError("One or more fields for client are invalid.\n" +
-								"Please check if validated fields like country code and VAT number don't contain any leading or trailing spaces.");
+						.openError("One or more fields for client are invalid.");
 				return;
 			}
-			// add modified client 
+			// add modified client
 			SToAClient.addNewOrEditedClient(client);
 		}
 	}
@@ -220,16 +218,21 @@ public class EditClientWindow extends JPanel {
 			saveToClient(client);
 			// check if client with new saved data is valid
 			if (!SToAClient.clientIsValid(client)) {
-				OKNotificationWindow
-						.openError("One or more fields for client are invalid.\n" +
-								"Please check if validated fields like country code and VAT number don't contain any leading or trailing spaces.");
+				// TODO give option to fix client automatic based on import line
+				if (OKCancelNotificationWindow
+						.open("One or more fields for client are invalid.\n"
+								+ "Please check if validated fields like country code and VAT number don't contain any leading or trailing spaces.\n"
+								+ "Do you wish for the system to try and fix them?")) {
+					SToAClient.completeUnvalidClient(client, model.getRows()
+							.get(row));
+				}
 				return;
 			}
-			
+
 			// add new ID mapping
 			SToAClient.addNewClientMapping(model.getRows().get(row)
 					.getBookingLineField(BookingLineFields.KlantID), client);
-			//save to model
+			// save to model
 			SToAClient.addNewOrEditedClient(client);
 			// update mapping in table
 			model.updateClientMapping();
@@ -247,7 +250,8 @@ public class EditClientWindow extends JPanel {
 
 		// build client from row data
 
-		RelationServiceData client = WSDataObjectCreator.getRelation("0",
+		RelationServiceData client = WSDataObjectCreator.getRelation(
+				SToAClient.getValidExternalID() + "",
 				rowData.getClientField(ClientFields.Naam),
 				rowData.getClientField(ClientFields.StraatEnNummer),
 				rowData.getClientField(ClientFields.Postcode),
@@ -258,8 +262,7 @@ public class EditClientWindow extends JPanel {
 				rowData.getClientField(ClientFields.NrOfExperitiationDays),
 				rowData.getClientField(ClientFields.Language),
 				rowData.getClientField(ClientFields.BTWPlichtigheid), "", "");
-		
-		
+
 		loadFromClient(client);
 		// open input box for new client
 		openDialog(parent, row, column, client, model);

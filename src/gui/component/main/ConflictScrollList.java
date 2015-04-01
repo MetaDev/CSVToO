@@ -3,7 +3,7 @@ package gui.component.main;
 import gui.component.custom.ConflictTableComboBoxCellEditor;
 import gui.component.custom.OKCancelNotificationWindow;
 import gui.window.client.EditClientWindow;
-import gui.window.client.ExistingClientWindow;
+import gui.window.client.LinkClientWindow;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -74,9 +74,9 @@ public class ConflictScrollList extends JPanel {
 				// if in external ID column
 				if (column == BookingLineFields.OctopusClient.ordinal()) {
 
+					
 					// Custom button text
-					Object[] options = { "Previously Existing",
-							"Recently Edited", "Create New" };
+					Object[] options = { "Previously Existing", "Recently Edited", "Create New" };
 					int n = JOptionPane.showOptionDialog(null,
 							"Link with existing or new client?",
 							"Choose a client.",
@@ -86,29 +86,30 @@ public class ConflictScrollList extends JPanel {
 					// Existing
 					if (n == 0) {
 						// open existing client window
-						new ExistingClientWindow().open(parent, row, column,
+						new LinkClientWindow().open(parent, row, column,
 								CacheModel.getClients(), model);
 					}
 					// Recently linked
 					else if (n == 1) {
 						// open client window with all recently added clients
-						new ExistingClientWindow().open(parent, row, column,
+						new LinkClientWindow().open(parent, row, column,
 								SToAClient.getNewOrEditedClients(), model);
 					}
 					// New
 					else if (n == 2) {
 						// new client already exists
-						if (SToAClient.getClientByVATNr(model
-								.getRows()
+						if(SToAClient.getClientByVATNr(model.getRows()
 								.get(row)
-								.getBookingLineField(
-										BookingLineFields.BTWNummer)) != null) {
+								.getBookingLineField(BookingLineFields.BTWNummer))!=null){
+
 							//alert user of duplicate vat number
 							if (!OKCancelNotificationWindow
 									.open("A client whit this VAT number already exists, if you want to link with it,"
 											+ " choose from RECENTLY LINKED or PREVIOUSLY EXISTING.\n"
-											+ "Do you wish to continue?"))
+											+ "Do you wish to continue?")){
 								return;
+							}
+								
 						}
 						// open a client edit window filled with row info
 						new EditClientWindow().open(parent, row, column, model);

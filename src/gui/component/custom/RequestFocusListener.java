@@ -24,7 +24,8 @@ public class RequestFocusListener implements AncestorListener {
 
 	public void ancestorRemoved(AncestorEvent e) {
 	}
-	public static void setComponentFocusOnOpen(JComponent component){
+
+	public static void setComponentFocusOnOpen(JComponent component) {
 		component.addAncestorListener(new RequestFocusListener());
 	}
 }

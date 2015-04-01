@@ -29,12 +29,14 @@ public class ConflictTabelRow {
 		setColumn(value, field.ordinal());
 	}
 
+	// use a switch case some bookingline fields have to be reformatted or
+	// parsed
 	public void initBookingLineField(BookingLineFields field, String value) {
 		bookingLineFields[field.ordinal()] = value;
 	}
 
 	// TODO use new set method everywhere
-	public ConflictTabelRow(String[] line, boolean isShipping) {
+	public ConflictTabelRow(String[] line) {
 		importFields = line;
 		this.modifiedColumns = new int[line.length + 1];
 		bookingLineFields = new String[BookingLineFields.values().length];
@@ -43,43 +45,38 @@ public class ConflictTabelRow {
 		// ImportFields.FactuurNummer,ImportFields.KlantID,ImportFields.BTWNummer,ImportFields.BoekingBedragExclBTW,
 		initBookingLineField(BookingLineFields.FactuurNummer,
 				getImportField(ImportFields.FactuurNummer));
+		bookingLineFields[BookingLineFields.FactuurNummer.ordinal()] = SToAField
+				.parseNumeric(line[ImportFields.FactuurNummer.ordinal()]);
 		bookingLineFields[BookingLineFields.KlantID.ordinal()] = line[ImportFields.KlantID
 				.ordinal()];
-		bookingLineFields[BookingLineFields.BTWNummer.ordinal()] = line[ImportFields.BTWNummer
+		bookingLineFields[BookingLineFields.BTWNummer.ordinal()] = SToAField
+				.removeBTWFormatting(line[ImportFields.BTWNummer.ordinal()]);
+		bookingLineFields[BookingLineFields.LandCode.ordinal()] = line[ImportFields.LandCode
 				.ordinal()];
-		bookingLineFields[BookingLineFields.LandCode.ordinal()] = SToAField
-				.getCountryCodeFromCountryName(line[ImportFields.Land.ordinal()]);
 		bookingLineFields[BookingLineFields.FactuurDatum.ordinal()] = line[ImportFields.FactuurDatum
 				.ordinal()];
 		bookingLineFields[BookingLineFields.VervalDatum.ordinal()] = line[ImportFields.VervalDatum
 				.ordinal()];
 		initBookingLineField(BookingLineFields.Naam,
 				line[ImportFields.Naam.ordinal()]);
-		// if it's a shipping the amount is equal to the shipping price
-		// the reference is already defined message stating that the payment is
-		// a shipping and handling line
-		if (isShipping) {
-			bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = line[ImportFields.ShippingAndHandling
-					.ordinal()];
-			bookingLineFields[BookingLineFields.Referentie.ordinal()] = AppConstants.shippingAndHandlingReference;
-		} else {
-			bookingLineFields[BookingLineFields.Referentie.ordinal()] = line[ImportFields.Referentie
-					.ordinal()];
-			bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = line[ImportFields.BoekingBedragExclBTW
-					.ordinal()];
-		}
-		bookingLineFields[BookingLineFields.NrOfExperitiationDays.ordinal()] = line[ImportFields.NrOfExperitiationDays
+		bookingLineFields[BookingLineFields.Referentie.ordinal()] = line[ImportFields.Referentie
 				.ordinal()];
-		// to convert lines
 
+		bookingLineFields[BookingLineFields.Opmerking.ordinal()] = line[ImportFields.Opmerking
+				.ordinal()];
+
+		// to convert lines
+		bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = SToAField
+				.parseAmountFromStringWithCurrency(line[ImportFields.BoekingBedragExclBTW
+						.ordinal()]);
+		bookingLineFields[BookingLineFields.NrOfExperitiationDays.ordinal()] = SToAField
+				.getNumerOfExperiationDays(line);
 		bookingLineFields[BookingLineFields.OctopusClient.ordinal()] = getExternalClientName(line[ImportFields.KlantID
 				.ordinal()]);
-		String BTWCode = SToAField.getBTWCodeSuggestion(
-				line[ImportFields.BTW6.ordinal()],
-				line[ImportFields.BTW21.ordinal()]);
-		// default btwcode or non existing BTWCode
-		if (BTWCode.equals("00")
-				|| !CacheModel.getVatCodes().containsKey(BTWCode)) {
+		String BTWCode = SToAField
+				.getBTWCodeSuggestion(line[ImportFields.BTWCode.ordinal()]);
+		// if btwcode doesn't exist in account set to default
+		if (!CacheModel.getVatCodes().containsKey(BTWCode)) {
 			// if not found in map set default
 			if (!CacheModel.getVatCodes().containsKey(BTWCode))
 				BTWCode = CacheModel.getVatCodes().keySet()
@@ -101,6 +98,10 @@ public class ConflictTabelRow {
 
 	}
 
+	public String[] getBookingLineFields() {
+		return bookingLineFields;
+	}
+
 	private String getExternalClientName(String clientID) {
 		RelationServiceData externalClient = SToAClient
 				.getClientFromExtID(SToAClient.getExternalOctopusID(clientID));
@@ -109,7 +110,7 @@ public class ConflictTabelRow {
 		return "";
 	}
 
-	private String getImportField(ImportFields field) {
+	public String getImportField(ImportFields field) {
 		return importFields[field.ordinal()];
 	}
 
@@ -128,7 +129,7 @@ public class ConflictTabelRow {
 		case BTWPlichtigheid:
 			return SToAField.getBTWPlichtigheid(
 					bookingLineFields[BookingLineFields.BTWNummer.ordinal()],
-					importFields[ImportFields.Land.ordinal()]);
+					importFields[ImportFields.LandCode.ordinal()]);
 		case BookingAccount:
 			return bookingLineFields[BookingLineFields.BookingAccountKey
 					.ordinal()];

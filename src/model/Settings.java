@@ -26,7 +26,7 @@ public class Settings {
 	}
 
 	private static void loadPreference() {
-		FileHandler.cacheCSVMapping(FileHandler.parseCSV(AppUtil
+		FileHandler.cacheCSVMapping(FileHandler.parseCSVCommaAndQuotes(AppUtil
 				.mergeFolderAndFileName(AppConstants.preferenceFile,
 						AppConstants.configDir)), preferences);
 	}

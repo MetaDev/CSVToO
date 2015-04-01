@@ -4,11 +4,7 @@ import gui.component.custom.OKNotificationWindow;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -28,11 +24,9 @@ public class ConflictTabelModel extends DefaultTableModel {
 	private List<ConflictTabelRow> rows;
 	private int[] selectedRow;
 
-
 	public List<ConflictTabelRow> getRows() {
 		return rows;
 	}
-
 
 	public ConflictTabelModel(String[] columnNames) {
 		super(columnNames, 0);
@@ -88,26 +82,12 @@ public class ConflictTabelModel extends DefaultTableModel {
 
 		// construct a Conflict table row object for each line
 		List<ConflictTabelRow> newRows = new ArrayList<>();
-		Set<String> shippingAndHandlingForBookingNrs = new HashSet<>();
 		ConflictTabelRow newRow;
 		for (String[] line : allRows) {
 			// only add booking lines with booking nr and with a price > 0
 			if (validImportBooking(line[ImportFields.FactuurNummer.ordinal()],
 					line[ImportFields.BoekingBedragExclBTW.ordinal()])) {
-				// construct an extra row for shipping and handling, once for
-				// every booking nr
-				// if necessary
-				String sAndHPrice = line[ImportFields.ShippingAndHandling
-						.ordinal()];
-				String bookingNr = line[ImportFields.FactuurNummer.ordinal()];
-				if (SToAField.parseDouble(sAndHPrice) > 0
-						&& !shippingAndHandlingForBookingNrs
-								.contains(bookingNr)) {
-					shippingAndHandlingForBookingNrs.add(bookingNr);
-					newRow = new ConflictTabelRow(line, true);
-					newRows.add(newRow);
-				}
-				newRow = new ConflictTabelRow(line, false);
+				newRow = new ConflictTabelRow(line);
 				newRows.add(newRow);
 			}
 		}
@@ -143,7 +123,9 @@ public class ConflictTabelModel extends DefaultTableModel {
 
 	@Override
 	public boolean isCellEditable(int row, int column) {
-		if (column != BookingLineFields.OctopusClient.ordinal()) {
+		if (column != BookingLineFields.OctopusClient.ordinal()
+				&& column != BookingLineFields.KlantID.ordinal()
+				&& column != BookingLineFields.FactuurNummer.ordinal()) {
 			return true;
 		}
 		return false;
@@ -154,8 +136,8 @@ public class ConflictTabelModel extends DefaultTableModel {
 	}
 
 	public boolean isCellValid(int row, int column) {
-		return SToABooking.fieldIsValid(BookingLineFields.values()[column],
-				(String) getValueAt(row, column));
+		return SToABooking.fieldIsValid(getRows().get(row),
+				BookingLineFields.values()[column]);
 	}
 
 	/*

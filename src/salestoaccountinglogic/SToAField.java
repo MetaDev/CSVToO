@@ -6,13 +6,16 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -25,7 +28,7 @@ import util.AppUtil;
 public class SToAField {
 	// all fields in order from imported csv with booking lines
 	public enum ImportFields {
-		FactuurNummer, KlantID, Naam, StraatEnNummer, Postcode, Gemeente, Land, BTWNummer, FactuurDatum, VervalDatum, Referentie, BoekingBedragExclBTW, ShippingAndHandling, NrOfExperitiationDays, BTW6, BTW21
+		FactuurNummer, KlantID, Naam, StraatEnNummer, Postcode, Gemeente, LandCode, BTWNummer, FactuurDatum, VervalDatum, Opmerking, Referentie, BoekingBedragExclBTW, BTWCode, Betalingswijze
 	}
 
 	public enum VATLiability {
@@ -39,16 +42,16 @@ public class SToAField {
 	}
 
 	// from country code to booking account id
-	private static Map<String, String> bookingAccount = new HashMap<>();
-	private static Map<String, String> countryCodeMapping = new HashMap<>();
 	private static Map<String, String> languageMapping = new HashMap<>();
 	private static Map<String, String> vatLiabilityNameMapping = new HashMap<>();
+	private static Set<String> countryCodes = new HashSet<>();
 
 	/*
 	 * different for each client
 	 */
+	// client specific
 	public static String getBookingAccountSuggestion(String countryCode) {
-		return bookingAccount.get(countryCode);
+		return "700000";
 	}
 
 	/*
@@ -63,21 +66,13 @@ public class SToAField {
 				.put("7", VATLiability.ParticulierBelgium.name());
 		vatLiabilityNameMapping.put("8", VATLiability.ParticulierEurope.name());
 
-		// map English country name to ISO-2 letter Country Code
-		List<String[]> countryCodes = FileHandler.parseCSV(AppUtil
-				.mergeFolderAndFileName(AppConstants.countryCodeMapFile,
-						AppConstants.configDir));
-		FileHandler.cacheCSVMapping(countryCodes, countryCodeMapping);
 		// map country code to a language (int)
-		List<String[]> languages = FileHandler.parseCSV(AppUtil
+		List<String[]> languages = FileHandler.parseCSVCommaAndQuotes(AppUtil
 				.mergeFolderAndFileName(AppConstants.languageMapFile,
 						AppConstants.configDir));
 		FileHandler.cacheCSVMapping(languages, languageMapping);
-		// Map booking accounts from country code to booking account id
-		List<String[]> bookingAccounts = FileHandler.parseCSV(AppUtil
-				.mergeFolderAndFileName(AppConstants.bookingAccountMapFile,
-						AppConstants.configDir));
-		FileHandler.cacheCSVMapping(bookingAccounts, bookingAccount);
+		// Save all correct iso 2 country codes
+		countryCodes.addAll(Arrays.asList(Locale.getISOCountries()));
 
 	}
 
@@ -95,18 +90,6 @@ public class SToAField {
 
 	public static String getlanguagedescription(int languageCode) {
 		return SToAField.Language.values()[languageCode].name();
-	}
-
-	public static String getCountryCodeFromBTWNr(String BTWNr) {
-		if (BTWNr.length() >= 2)
-			return BTWNr.substring(0, 2);
-		return "";
-	}
-
-	public static String getCountryCodeFromCountryName(String countryName) {
-		if(countryCodeMapping.containsKey(countryName))
-		return countryCodeMapping.get(countryName);
-		return "Country code suggestion not found";
 	}
 
 	public static boolean isAlphaNumeric(String s) {
@@ -148,6 +131,60 @@ public class SToAField {
 		else if (countryCode.equals("LU")) {
 			return BTWNr.matches("^LU[0-9]{8}$");
 		}
+		// 1 block of 8 digits SI99999999
+		else if (countryCode.equals("SI")) {
+			return BTWNr.matches("^SI[0-9]{8}$");
+		} else if (countryCode.equals("AT")) {
+			return BTWNr.matches("^ATU[0-9]{9}$");
+		} else if (countryCode.equals("BG")) {
+			return BTWNr.matches("^BG[0-9]{9}$")
+					|| BTWNr.matches("^BG[0-9]{10}$");
+		} else if (countryCode.equals("CY")) {
+			return BTWNr.matches("^CY[0-9]{9}$");
+		} else if (countryCode.equals("CZ")) {
+			return BTWNr.matches("^CZ[0-9]{8}$")
+					|| BTWNr.matches("^CZ[0-9]{9}$")
+					|| BTWNr.matches("^CZ[0-9]{10}$");
+		} else if (countryCode.equals("EE")) {
+			return BTWNr.matches("^EE[0-9]{9}$");
+		} else if (countryCode.equals("EL")) {
+			return BTWNr.matches("^EL[0-9]{9}$");
+		} else if (countryCode.equals("FI")) {
+			return BTWNr.matches("^FI[0-9]{8}$");
+		} else if (countryCode.equals("GB")) {
+			return BTWNr.matches("^GB[0-9]{3} [0-9]{4} [0-9]{2}$")
+					|| BTWNr.matches("^GB[0-9]{3} [0-9]{4} [0-9]{2} [0-9]{3}$")
+					|| BTWNr.matches("^GBGD[0-9]{3}$")
+					|| BTWNr.matches("^GBHA[0-9]{3}$");
+		} else if (countryCode.equals("HR")) {
+			return BTWNr.matches("^HR[0-9]{11}$");
+		} else if (countryCode.equals("HU")) {
+			return BTWNr.matches("^HU[0-9]{8}$");
+		} else if (countryCode.equals("IE")) {
+			return BTWNr.matches("^IE[0-9]S[0-9]{5}L$")
+					|| BTWNr.matches("^IE[0-9]{5}WI$");
+		} else if (countryCode.equals("IT")) {
+			return BTWNr.matches("^IT[0-9]{11}$");
+		} else if (countryCode.equals("LT")) {
+			return BTWNr.matches("^LT[0-9]{9}$")
+					|| BTWNr.matches("^LT[0-9]{12}$");
+		} else if (countryCode.equals("LV")) {
+			return BTWNr.matches("^LV[0-9]{11}$");
+		} else if (countryCode.equals("MT")) {
+			return BTWNr.matches("^MT[0-9]{8}$");
+		} else if (countryCode.equals("PL")) {
+			return BTWNr.matches("^PL[0-9]{10}$");
+		} else if (countryCode.equals("PT")) {
+			return BTWNr.matches("^HR[0-9]{9}$");
+		} else if (countryCode.equals("RO")) {
+			return BTWNr.matches("^HR[0-9]{2,10}$");
+		} else if (countryCode.equals("SE")) {
+			return BTWNr.matches("^HR[0-9]{13}$");
+		} else if (countryCode.equals("SI")) {
+			return BTWNr.matches("^HR[0-9]{8}$");
+		} else if (countryCode.equals("SL")) {
+			return BTWNr.matches("^HR[0-9]{10}$");
+		}
 		// particulier so no BTW number, but it can't be empty
 		else {
 			return isBTWNrParticulier(BTWNr);
@@ -167,6 +204,14 @@ public class SToAField {
 		return BTWNr.equals(AppConstants.particulierCode);
 	}
 
+	public static String removeBTWFormatting(String BTWNr) {
+		return parseAlphaNumeric(BTWNr);
+	}
+
+	public static String parseAlphaNumeric(String alphaNum) {
+		return alphaNum.replaceAll("[^0-9A-Z]", "");
+	}
+
 	public static XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
 		XMLGregorianCalendar result = null;
 		Date date;
@@ -183,6 +228,19 @@ public class SToAField {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public static String getNumerOfExperiationDays(String[] importLine) {
+		String betalingsWijze = importLine[ImportFields.Betalingswijze
+				.ordinal()];
+		// contant payment
+		if (betalingsWijze.equals("KON") || betalingsWijze.equals("ADV"))
+			return "0";
+		return parseNumeric(betalingsWijze);
+	}
+
+	public static String parseNumeric(String stringWithNumeric) {
+		return stringWithNumeric.replaceAll("[^0-9]", "");
 	}
 
 	public static Double parseDouble(String s) {
@@ -207,11 +265,11 @@ public class SToAField {
 	}
 
 	// return BTWplichtigheid based on BTWnumber
-	public static String getBTWPlichtigheid(String BTWNr, String countryName) {
+	public static String getBTWPlichtigheid(String BTWNr, String landCode) {
 		// particulier
 		if (isBTWNrParticulier(BTWNr)) {
 			// belg
-			if (countryName.equals("Belgium")) {
+			if (landCode.equals("BE")) {
 				return "7";
 			}
 			// europees
@@ -222,7 +280,7 @@ public class SToAField {
 		// Onderneming
 		else {
 			// belg
-			if (BTWNr.startsWith("BE")) {
+			if (landCode.equals("BE")) {
 				return "1";
 			}
 			// europees
@@ -281,31 +339,26 @@ public class SToAField {
 	}
 
 	public static boolean isCountryCode(String countryCode) {
-		return countryCodeMapping.values().contains(countryCode);
+		return countryCodes.contains(countryCode);
 	}
 
 	/*
 	 * based on the amount of VAT payed, determine code
 	 */
-	public static String getBTWCodeSuggestion(String BTW6, String BTW21) {
-		double btw6 = parseDouble(BTW6);
-		double btw21 = parseDouble(BTW21);
-		// 21
-		if (btw21 > 0) {
-			return "21";
-		}
-		// 6
-		else if (btw6 > 0) {
-			return "06";
-		} else
-		// intra communotaire
-		if (btw6 == 0 && btw21 == 0) {
+	public static String getBTWCodeSuggestion(String importBTWCode) {
+		// only INCO needs to be translated
+		if (importBTWCode.equals("INCO")) {
 			return "CM";
-
 		}
-		// error
-		return "00";
+		return importBTWCode;
+	}
 
+	/*
+	 * remove everything except numbers comma's and negative signs
+	 */
+	public static String parseAmountFromStringWithCurrency(
+			String amountWithCurrency) {
+		return amountWithCurrency.replaceAll("[^0-9,.-]", "");
 	}
 
 	/*

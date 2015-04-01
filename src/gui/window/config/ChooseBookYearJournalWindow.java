@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import model.AppConstants;
 import model.CacheModel;
+import model.Settings;
 
 import webcomm.octws.BookyearServiceData;
 import webcomm.octws.JournalServiceData;
@@ -60,6 +61,13 @@ public class ChooseBookYearJournalWindow extends JPanel {
 		// dynamically
 		bookYearBox.getComboBox().addItemListener(journalBox);
 
+		//load from preferences
+		if (Settings.getPreference("BookYear") != null) {
+			bookYearBox.getComboBox().setSelectedItem(Settings.getPreference("BookYear"));
+		}
+		if (Settings.getPreference("Journal") != null) {
+			journalBox.getComboBox().setSelectedItem(Settings.getPreference("Journal"));
+		}
 		add(bookYearBox);
 		add(journalBox);
 
@@ -88,7 +96,8 @@ public class ChooseBookYearJournalWindow extends JPanel {
 					bookYear, (String) journalBox.getComboBox()
 							.getSelectedItem());
 			AppConstants.setActiveBookYearAndJournal(bookYear, journal);
-
+			Settings.setPreference("BookYear", bookYear.getBookyearDescription());
+			Settings.setPreference("Journal",journal.getName());
 			return true;
 		}
 		return false;
