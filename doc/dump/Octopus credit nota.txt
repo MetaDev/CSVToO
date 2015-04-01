@@ -1,0 +1,11 @@
+Indien het een credit nota is, is het totaal bedrag negatief, maar zijn de boekingslijnen positief.
+
+Indien het een gewone boeking is, is het totale bedrag positief en zijn de boekingslijnen ook positief.
+
+ 
+
+Maar indien in totaal het bedrag positief is van een boeking, dan dienen lijnen die gecrediteerd te worden negatief te zijn. ( Bijvoorbeeld teruggave leeggoed )
+
+Maar indien in totaal het bedrag negatief is ( dus een volledige creditnota ), dan dienen lijnen die debet zijn ( aankoop van een blikje 20€ ) negatief te zijn.
+
+ 

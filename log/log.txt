@@ -1,0 +1,161 @@
+java.lang.NullPointerException
+	at gui.window.config.ChooseBookYearJournalWindow.<init>(ChooseBookYearJournalWindow.java:39)
+	at gui.window.config.LoginWindow.open(LoginWindow.java:77)
+	at MainWindow.initGUIAndConfig(MainWindow.java:71)
+	at MainWindow.main(MainWindow.java:30)
+java.lang.NullPointerException
+	at gui.window.config.ChooseBookYearJournalWindow.<init>(ChooseBookYearJournalWindow.java:39)
+	at gui.window.config.LoginWindow.open(LoginWindow.java:77)
+	at MainWindow.initGUIAndConfig(MainWindow.java:71)
+	at MainWindow.main(MainWindow.java:30)
+java.lang.NullPointerException
+	at gui.window.config.ChooseBookYearJournalWindow.<init>(ChooseBookYearJournalWindow.java:39)
+	at gui.window.config.LoginWindow.open(LoginWindow.java:77)
+	at MainWindow.initGUIAndConfig(MainWindow.java:71)
+	at MainWindow.main(MainWindow.java:30)
+Client Max Vitaal NR 4
+Adress: de Deel 12, Emmeloord NL
+Info: booking account: 700000; Vat type: 4
+
+
+------------------------------------------------------
+Het document nummer is ongeldig. Het document nummer dient tevens oplopend te zijn en dient opeenvolgend te zijn met het laatste document nummer van het dagboek.Error log, created upon failing of uploading this booking:
+Booking for Cartagena Bvba with number: 35
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127,40 Euro
+
+Line;
+base amount: 15,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97,90 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14,50 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for Max Vitaal with number: 36
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12,01 Euro
+
+Line;
+base amount: 10,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2,01 Euro; vat amount: 0,00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for Thuiszorgwinkel hq Leuven with number: 37
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634,61 Euro
+
+Line;
+base amount: 30,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604,61 Euro; vat amount: 0,00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+------------------------------------------------------
+Het document nummer is ongeldig. Het document nummer dient tevens oplopend te zijn en dient opeenvolgend te zijn met het laatste document nummer van het dagboek.Error log, created upon failing of uploading this booking:
+Booking for Thuiszorgwinkel hq Leuven with number: 46
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634,61 Euro
+
+Line;
+base amount: 30,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604,61 Euro; vat amount: 0,00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Booking for Cartagena Bvba with number: 44
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127,40 Euro
+
+Line;
+base amount: 15,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97,90 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14,50 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for Max Vitaal with number: 45
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12,01 Euro
+
+Line;
+base amount: 10,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2,01 Euro; vat amount: 0,00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+------------------------------------------------------
+Het document nummer is ongeldig. Het document nummer dient tevens oplopend te zijn en dient opeenvolgend te zijn met het laatste document nummer van het dagboek.Error log, created upon failing of uploading this booking:
+Booking for Thuiszorgwinkel hq Leuven with number: 46
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634,61 Euro
+
+Line;
+base amount: 30,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604,61 Euro; vat amount: 0,00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Booking for Cartagena Bvba with number: 44
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127,40 Euro
+
+Line;
+base amount: 15,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97,90 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14,50 Euro; vat amount: 0,00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for Max Vitaal with number: 45
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12,01 Euro
+
+Line;
+base amount: 10,00 Euro; vat amount: 0,00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2,01 Euro; vat amount: 0,00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+

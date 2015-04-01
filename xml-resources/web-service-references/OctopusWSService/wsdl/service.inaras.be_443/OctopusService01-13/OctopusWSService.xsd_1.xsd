@@ -1,0 +1,1450 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.3-b01-. --><xs:schema xmlns:tns="http://service.octopus.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.octopus.com/">
+
+<xs:element name="Authenticate" type="tns:Authenticate" />
+
+<xs:element name="AuthenticateAndConnect" type="tns:AuthenticateAndConnect" />
+
+<xs:element name="AuthenticateAndConnectResponse" type="tns:AuthenticateAndConnectResponse" />
+
+<xs:element name="AuthenticateResponse" type="tns:AuthenticateResponse" />
+
+<xs:element name="CloseDossier" type="tns:CloseDossier" />
+
+<xs:element name="CloseDossierResponse" type="tns:CloseDossierResponse" />
+
+<xs:element name="ConnectToDossier" type="tns:ConnectToDossier" />
+
+<xs:element name="ConnectToDossierResponse" type="tns:ConnectToDossierResponse" />
+
+<xs:element name="ExportDeliveryNote" type="tns:ExportDeliveryNote" />
+
+<xs:element name="ExportDeliveryNoteResponse" type="tns:ExportDeliveryNoteResponse" />
+
+<xs:element name="ExportInvoice" type="tns:ExportInvoice" />
+
+<xs:element name="ExportInvoiceResponse" type="tns:ExportInvoiceResponse" />
+
+<xs:element name="ExportRappel" type="tns:ExportRappel" />
+
+<xs:element name="ExportRappelResponse" type="tns:ExportRappelResponse" />
+
+<xs:element name="GetAccounts" type="tns:GetAccounts" />
+
+<xs:element name="GetAccountsResponse" type="tns:GetAccountsResponse" />
+
+<xs:element name="GetBookyears" type="tns:GetBookyears" />
+
+<xs:element name="GetBookyearsResponse" type="tns:GetBookyearsResponse" />
+
+<xs:element name="GetBuySellBooking" type="tns:GetBuySellBooking" />
+
+<xs:element name="GetBuySellBookingResponse" type="tns:GetBuySellBookingResponse" />
+
+<xs:element name="GetCostCentres" type="tns:GetCostCentres" />
+
+<xs:element name="GetCostCentresResponse" type="tns:GetCostCentresResponse" />
+
+<xs:element name="GetDeliveryNote" type="tns:GetDeliveryNote" />
+
+<xs:element name="GetDeliveryNoteResponse" type="tns:GetDeliveryNoteResponse" />
+
+<xs:element name="GetDossiers" type="tns:GetDossiers" />
+
+<xs:element name="GetDossiersResponse" type="tns:GetDossiersResponse" />
+
+<xs:element name="GetErrorDescription" type="tns:GetErrorDescription" />
+
+<xs:element name="GetErrorDescriptionResponse" type="tns:GetErrorDescriptionResponse" />
+
+<xs:element name="GetFinancialDiversBooking" type="tns:GetFinancialDiversBooking" />
+
+<xs:element name="GetFinancialDiversBookingResponse" type="tns:GetFinancialDiversBookingResponse" />
+
+<xs:element name="GetFinancialJournalBalance" type="tns:GetFinancialJournalBalance" />
+
+<xs:element name="GetFinancialJournalBalanceResponse" type="tns:GetFinancialJournalBalanceResponse" />
+
+<xs:element name="GetInvoice" type="tns:GetInvoice" />
+
+<xs:element name="GetInvoiceResponse" type="tns:GetInvoiceResponse" />
+
+<xs:element name="GetJournals" type="tns:GetJournals" />
+
+<xs:element name="GetJournalsResponse" type="tns:GetJournalsResponse" />
+
+<xs:element name="GetLastError" type="tns:GetLastError" />
+
+<xs:element name="GetLastErrorResponse" type="tns:GetLastErrorResponse" />
+
+<xs:element name="GetModifiedAccountAmounts" type="tns:GetModifiedAccountAmounts" />
+
+<xs:element name="GetModifiedAccountAmountsResponse" type="tns:GetModifiedAccountAmountsResponse" />
+
+<xs:element name="GetModifiedBalancingRelations" type="tns:GetModifiedBalancingRelations" />
+
+<xs:element name="GetModifiedBalancingRelationsResponse" type="tns:GetModifiedBalancingRelationsResponse" />
+
+<xs:element name="GetModifiedBuySellBookings" type="tns:GetModifiedBuySellBookings" />
+
+<xs:element name="GetModifiedBuySellBookingsResponse" type="tns:GetModifiedBuySellBookingsResponse" />
+
+<xs:element name="GetModifiedDeliveryNotes" type="tns:GetModifiedDeliveryNotes" />
+
+<xs:element name="GetModifiedDeliveryNotesResponse" type="tns:GetModifiedDeliveryNotesResponse" />
+
+<xs:element name="GetModifiedFinancialDiversBookings" type="tns:GetModifiedFinancialDiversBookings" />
+
+<xs:element name="GetModifiedFinancialDiversBookingsResponse" type="tns:GetModifiedFinancialDiversBookingsResponse" />
+
+<xs:element name="GetModifiedInvoices" type="tns:GetModifiedInvoices" />
+
+<xs:element name="GetModifiedInvoicesResponse" type="tns:GetModifiedInvoicesResponse" />
+
+<xs:element name="GetModifiedRelations" type="tns:GetModifiedRelations" />
+
+<xs:element name="GetModifiedRelationsResponse" type="tns:GetModifiedRelationsResponse" />
+
+<xs:element name="GetProductGroups" type="tns:GetProductGroups" />
+
+<xs:element name="GetProductGroupsResponse" type="tns:GetProductGroupsResponse" />
+
+<xs:element name="GetProducts" type="tns:GetProducts" />
+
+<xs:element name="GetProductsResponse" type="tns:GetProductsResponse" />
+
+<xs:element name="GetRappelInformation" type="tns:GetRappelInformation" />
+
+<xs:element name="GetRappelInformationResponse" type="tns:GetRappelInformationResponse" />
+
+<xs:element name="GetRelations" type="tns:GetRelations" />
+
+<xs:element name="GetRelationsResponse" type="tns:GetRelationsResponse" />
+
+<xs:element name="GetReportHistoryAccount" type="tns:GetReportHistoryAccount" />
+
+<xs:element name="GetReportHistoryAccountResponse" type="tns:GetReportHistoryAccountResponse" />
+
+<xs:element name="GetReportHistoryClient" type="tns:GetReportHistoryClient" />
+
+<xs:element name="GetReportHistoryClientResponse" type="tns:GetReportHistoryClientResponse" />
+
+<xs:element name="GetReportHistoryCostCentre" type="tns:GetReportHistoryCostCentre" />
+
+<xs:element name="GetReportHistoryCostCentreResponse" type="tns:GetReportHistoryCostCentreResponse" />
+
+<xs:element name="GetReportHistorySupplier" type="tns:GetReportHistorySupplier" />
+
+<xs:element name="GetReportHistorySupplierResponse" type="tns:GetReportHistorySupplierResponse" />
+
+<xs:element name="GetReportOpenAccount" type="tns:GetReportOpenAccount" />
+
+<xs:element name="GetReportOpenAccountResponse" type="tns:GetReportOpenAccountResponse" />
+
+<xs:element name="GetReportOpenClient" type="tns:GetReportOpenClient" />
+
+<xs:element name="GetReportOpenClientResponse" type="tns:GetReportOpenClientResponse" />
+
+<xs:element name="GetReportOpenSupplier" type="tns:GetReportOpenSupplier" />
+
+<xs:element name="GetReportOpenSupplierResponse" type="tns:GetReportOpenSupplierResponse" />
+
+<xs:element name="GetVatCodes" type="tns:GetVatCodes" />
+
+<xs:element name="GetVatCodesResponse" type="tns:GetVatCodesResponse" />
+
+<xs:element name="InsertBalancing" type="tns:InsertBalancing" />
+
+<xs:element name="InsertBalancingResponse" type="tns:InsertBalancingResponse" />
+
+<xs:element name="InsertBuySellBooking" type="tns:InsertBuySellBooking" />
+
+<xs:element name="InsertBuySellBookingResponse" type="tns:InsertBuySellBookingResponse" />
+
+<xs:element name="InsertDeliveryNote" type="tns:InsertDeliveryNote" />
+
+<xs:element name="InsertDeliveryNoteResponse" type="tns:InsertDeliveryNoteResponse" />
+
+<xs:element name="InsertFinancialDiversBooking" type="tns:InsertFinancialDiversBooking" />
+
+<xs:element name="InsertFinancialDiversBookingResponse" type="tns:InsertFinancialDiversBookingResponse" />
+
+<xs:element name="InsertInvoice" type="tns:InsertInvoice" />
+
+<xs:element name="InsertInvoiceResponse" type="tns:InsertInvoiceResponse" />
+
+<xs:element name="InsertUpdateAccount" type="tns:InsertUpdateAccount" />
+
+<xs:element name="InsertUpdateAccountResponse" type="tns:InsertUpdateAccountResponse" />
+
+<xs:element name="InsertUpdateCostcentre" type="tns:InsertUpdateCostcentre" />
+
+<xs:element name="InsertUpdateCostcentreResponse" type="tns:InsertUpdateCostcentreResponse" />
+
+<xs:element name="InsertUpdateProduct" type="tns:InsertUpdateProduct" />
+
+<xs:element name="InsertUpdateProductResponse" type="tns:InsertUpdateProductResponse" />
+
+<xs:element name="InsertUpdateRelation" type="tns:InsertUpdateRelation" />
+
+<xs:element name="InsertUpdateRelationResponse" type="tns:InsertUpdateRelationResponse" />
+
+<xs:element name="SetLocale" type="tns:SetLocale" />
+
+<xs:element name="SetLocaleResponse" type="tns:SetLocaleResponse" />
+
+<xs:element name="UpdateBuySellBooking" type="tns:UpdateBuySellBooking" />
+
+<xs:element name="UpdateBuySellBookingResponse" type="tns:UpdateBuySellBookingResponse" />
+
+<xs:element name="UpdateDeliveryNote" type="tns:UpdateDeliveryNote" />
+
+<xs:element name="UpdateDeliveryNoteResponse" type="tns:UpdateDeliveryNoteResponse" />
+
+<xs:element name="UpdateFinancialDiversBooking" type="tns:UpdateFinancialDiversBooking" />
+
+<xs:element name="UpdateFinancialDiversBookingResponse" type="tns:UpdateFinancialDiversBookingResponse" />
+
+<xs:element name="UpdateInvoice" type="tns:UpdateInvoice" />
+
+<xs:element name="UpdateInvoiceResponse" type="tns:UpdateInvoiceResponse" />
+
+<xs:complexType name="GetRelations">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetRelationsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:relationServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="relationServiceData">
+<xs:sequence>
+<xs:element name="active" type="xs:boolean" />
+<xs:element name="bankAccountNr" type="xs:string" minOccurs="0" />
+<xs:element name="bicCode" type="xs:string" minOccurs="0" />
+<xs:element name="city" type="xs:string" minOccurs="0" />
+<xs:element name="client" type="xs:boolean" />
+<xs:element name="contactPerson" type="xs:string" minOccurs="0" />
+<xs:element name="corporationType" type="xs:int" />
+<xs:element name="country" type="xs:string" minOccurs="0" />
+<xs:element name="defaultBookingAccountClient" type="xs:int" />
+<xs:element name="defaultBookingAccountSupplier" type="xs:int" />
+<xs:element name="email" type="xs:string" minOccurs="0" />
+<xs:element name="expirationDays" type="xs:int" />
+<xs:element name="expirationType" type="xs:int" />
+<xs:element name="externalRelationNr" type="xs:int" />
+<xs:element name="factLanguage" type="xs:int" />
+<xs:element name="fax" type="xs:string" minOccurs="0" />
+<xs:element name="ibanAccountNr" type="xs:string" minOccurs="0" />
+<xs:element name="mobile" type="xs:string" minOccurs="0" />
+<xs:element name="name" type="xs:string" minOccurs="0" />
+<xs:element name="postalCode" type="xs:string" minOccurs="0" />
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+<xs:element name="remarks" type="xs:string" minOccurs="0" />
+<xs:element name="searchField1" type="xs:string" minOccurs="0" />
+<xs:element name="searchField2" type="xs:string" minOccurs="0" />
+<xs:element name="streetAndNr" type="xs:string" minOccurs="0" />
+<xs:element name="supplier" type="xs:boolean" />
+<xs:element name="surName" type="xs:string" minOccurs="0" />
+<xs:element name="telephone" type="xs:string" minOccurs="0" />
+<xs:element name="url" type="xs:string" minOccurs="0" />
+<xs:element name="vatNr" type="xs:string" minOccurs="0" />
+<xs:element name="vatType" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="relationKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="intKey">
+<xs:complexContent>
+<xs:extension base="tns:comparator">
+<xs:sequence>
+<xs:element name="id" type="xs:int" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="comparator" abstract="true">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetModifiedInvoices">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bookyearKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedInvoicesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedInvoiceArray" type="tns:invoiceServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="invoiceServiceData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodeNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="expiryDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="financialDiscount" type="xs:double" />
+<xs:element name="invoiceLines" type="tns:invoiceLineServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="invoiceLineServiceData">
+<xs:sequence>
+<xs:element name="bookingAccountNr" type="xs:int" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="count" type="xs:double" />
+<xs:element name="description" type="xs:string" minOccurs="0" />
+<xs:element name="discountPercentage" type="xs:double" />
+<xs:element name="externProductNr" type="xs:string" minOccurs="0" />
+<xs:element name="unit" type="xs:string" minOccurs="0" />
+<xs:element name="unitPrice" type="xs:double" />
+<xs:element name="vatCodeKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="costCentreKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="GetFinancialJournalBalance">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetFinancialJournalBalanceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:journalBalance" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="journalBalance">
+<xs:sequence>
+<xs:element name="balance" type="xs:double" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetRappelInformation">
+<xs:sequence>
+<xs:element name="expirationDate" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetRappelInformationResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:rappelServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rappelServiceData">
+<xs:sequence>
+<xs:element name="invoiceList" type="tns:rappelInvoiceServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="relation" type="tns:relationServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rappelInvoiceServiceData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="expirationDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="openAmount" type="xs:double" />
+<xs:element name="rappelInfoList" type="tns:rappelInfoInvoiceServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rappelInfoInvoiceServiceData">
+<xs:sequence>
+<xs:element name="rappelDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="rappelId" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedBalancingRelations">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedBalancingRelationsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedBalancingArray" type="tns:balancingDetailServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="deletedBalancingArray" type="tns:balancingDetailServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balancingDetailServiceData">
+<xs:sequence>
+<xs:element name="creditBalancedBookingAmount" type="xs:double" />
+<xs:element name="creditDocument" type="tns:balancingDocumentServiceData" minOccurs="0" />
+<xs:element name="debetBalancedBookingAmount" type="xs:double" />
+<xs:element name="debetDocument" type="tns:balancingDocumentServiceData" minOccurs="0" />
+<xs:element name="type" type="tns:balancingTypeServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balancingDocumentServiceData">
+<xs:sequence>
+<xs:element name="balancingKey" type="tns:balancingKeyServiceData" minOccurs="0" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="creditBookingAmount" type="xs:double" />
+<xs:element name="creditDocumentAmount" type="xs:double" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="debetBookingAmount" type="xs:double" />
+<xs:element name="debetDocumentAmount" type="xs:double" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balancingKeyServiceData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="lineSequenceNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balancingTypeServiceData">
+<xs:sequence>
+<xs:element name="accountNr" type="xs:int" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+<xs:element name="type" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="CloseDossier">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="CloseDossierResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SetLocale">
+<xs:sequence>
+<xs:element name="locale" type="tns:localeKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="localeKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="SetLocaleResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetDossiers">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetDossiersResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dossierServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dossierServiceData">
+<xs:sequence>
+<xs:element name="dossierDescription" type="xs:string" minOccurs="0" />
+<xs:element name="dossierKey" type="tns:dossierKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dossierKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="GetAccounts">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetAccountsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:accountServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="accountServiceData">
+<xs:sequence>
+<xs:element name="accountKey" type="tns:accountKey" minOccurs="0" />
+<xs:element name="description" type="tns:stringServiceData" minOccurs="0" />
+<xs:element name="fiscProfessionalPercentage" type="xs:double" />
+<xs:element name="fiscRecupPercentage" type="xs:double" />
+<xs:element name="vatRecupPercentage" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="accountKey">
+<xs:complexContent>
+<xs:extension base="tns:comparator">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="stringServiceData">
+<xs:sequence>
+<xs:element name="description_FR" type="xs:string" minOccurs="0" />
+<xs:element name="description_NL" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetLastError">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetLastErrorResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetProducts">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetProductsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:productServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="productServiceData">
+<xs:sequence>
+<xs:element name="code" type="tns:stringServiceData" minOccurs="0" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="defaultBookingAccountNr" type="xs:int" />
+<xs:element name="defaultCostCentre" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="description" type="tns:stringServiceData" minOccurs="0" />
+<xs:element name="externProductNr" type="xs:string" minOccurs="0" />
+<xs:element name="priceVatExclusive" type="xs:double" />
+<xs:element name="priceVatInclusive" type="xs:double" />
+<xs:element name="productGroup" type="tns:productGroupKey" minOccurs="0" />
+<xs:element name="productKey" type="tns:productKey" minOccurs="0" />
+<xs:element name="supplierInfo" type="xs:string" minOccurs="0" />
+<xs:element name="unit" type="xs:string" minOccurs="0" />
+<xs:element name="vatCode" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="productGroupKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="productKey">
+<xs:complexContent>
+<xs:extension base="tns:intKey">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="ConnectToDossier">
+<xs:sequence>
+<xs:element name="dossierKey" type="tns:dossierKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ConnectToDossierResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateFinancialDiversBooking">
+<xs:sequence>
+<xs:element name="booking" type="tns:financialDiversBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="financialDiversBookingServiceData">
+<xs:sequence>
+<xs:element name="bookingLines" type="tns:financialDiversBookingLineServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodeNr" type="xs:int" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="financialDiversBookingLineServiceData">
+<xs:sequence>
+<xs:element name="accountKey" type="xs:int" />
+<xs:element name="amount" type="xs:double" />
+<xs:element name="codaInfo" type="tns:codaLineServiceData" minOccurs="0" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+<xs:element name="type" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="codaLineServiceData">
+<xs:sequence>
+<xs:element name="codaMoveLineData" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="codaVersion" type="tns:codaVersionData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="codaVersionData">
+<xs:sequence>
+<xs:element name="codaVersion" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateFinancialDiversBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateProduct">
+<xs:sequence>
+<xs:element name="product" type="tns:productServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AuthenticateAndConnect">
+<xs:sequence>
+<xs:element name="softwareHouseUuid" type="xs:string" minOccurs="0" />
+<xs:element name="credentials" type="tns:credentials" minOccurs="0" />
+<xs:element name="dossierKey" type="tns:dossierKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="credentials">
+<xs:sequence>
+<xs:element name="password" type="xs:string" minOccurs="0" />
+<xs:element name="user" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AuthenticateAndConnectResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryCostCentre">
+<xs:sequence>
+<xs:element name="historyCostCentreQueryData" type="tns:historyCostCentreQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="historyCostCentreQueryData">
+<xs:sequence>
+<xs:element name="fromAccountNr" type="xs:int" />
+<xs:element name="fromBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="fromBookyearPeriodNr" type="xs:int" />
+<xs:element name="showActiveCostCentres" type="xs:boolean" />
+<xs:element name="showEmptyCostcentres" type="xs:boolean" />
+<xs:element name="showInactiveCostCentres" type="xs:boolean" />
+<xs:element name="toAccountNr" type="xs:int" />
+<xs:element name="toBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="toBookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryCostCentreResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:historyCostCentreData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="historyCostCentreData">
+<xs:sequence>
+<xs:element name="accountKey" type="tns:accountKey" minOccurs="0" />
+<xs:element name="accountName" type="xs:string" minOccurs="0" />
+<xs:element name="activeCostCentre" type="xs:boolean" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="costCentreName" type="xs:string" minOccurs="0" />
+<xs:element name="creditBookingAmount" type="xs:double" />
+<xs:element name="debetBookingAmount" type="xs:double" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+<xs:element name="relationName" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateAccount">
+<xs:sequence>
+<xs:element name="account" type="tns:accountServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateAccountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertFinancialDiversBooking">
+<xs:sequence>
+<xs:element name="booking" type="tns:financialDiversBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertFinancialDiversBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetDeliveryNote">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetDeliveryNoteResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:deliveryNoteServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deliveryNoteServiceData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodeNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="deliveryNoteLines" type="tns:deliveryNoteLineServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="expiryDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="financialDiscount" type="xs:double" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deliveryNoteLineServiceData">
+<xs:sequence>
+<xs:element name="bookingAccountNr" type="xs:int" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="count" type="xs:double" />
+<xs:element name="description" type="xs:string" minOccurs="0" />
+<xs:element name="discountPercentage" type="xs:double" />
+<xs:element name="externProductNr" type="xs:string" minOccurs="0" />
+<xs:element name="unit" type="xs:string" minOccurs="0" />
+<xs:element name="unitPrice" type="xs:double" />
+<xs:element name="vatCodeKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportRappel">
+<xs:sequence>
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+<xs:element name="rappelId" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportRappelResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="pdfDocument" type="xs:base64Binary" nillable="true" minOccurs="0" />
+<xs:element name="publishUrl" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportDeliveryNote">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="returnDeliverynote" type="xs:boolean" />
+<xs:element name="returnPdfDocument" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportDeliveryNoteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="deliveryNote" type="tns:deliveryNoteServiceData" minOccurs="0" />
+<xs:element name="pdfDocument" type="xs:base64Binary" nillable="true" minOccurs="0" />
+<xs:element name="publishUrl" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetCostCentres">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetCostCentresResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:costCentreServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="costCentreServiceData">
+<xs:sequence>
+<xs:element name="closed" type="xs:boolean" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="description" type="tns:stringServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportInvoice">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="returnInvoice" type="xs:boolean" />
+<xs:element name="returnPdfDocument" type="xs:boolean" />
+<xs:element name="returnEInvoice" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ExportInvoiceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="invoice" type="tns:invoiceServiceData" minOccurs="0" />
+<xs:element name="pdfDocument" type="xs:base64Binary" nillable="true" minOccurs="0" />
+<xs:element name="einvoiceXml" type="xs:base64Binary" nillable="true" minOccurs="0" />
+<xs:element name="publishUrl" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedAccountAmounts">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedAccountAmountsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedAccountAmounts" type="tns:accountAmountServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="deletedAccountAmounts" type="tns:accountAmountServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="accountAmountServiceData">
+<xs:sequence>
+<xs:element name="accountAmountKey" type="tns:accountAmountKey" minOccurs="0" />
+<xs:element name="balance" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="accountAmountKey">
+<xs:complexContent>
+<xs:extension base="tns:comparator">
+<xs:sequence>
+<xs:element name="accountKey" type="tns:accountKey" minOccurs="0" />
+<xs:element name="bookyearPeriodKey" type="tns:bookyearPeriodKey" minOccurs="0" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="bookyearPeriodKey">
+<xs:complexContent>
+<xs:extension base="tns:comparator">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateRelation">
+<xs:sequence>
+<xs:element name="relation" type="tns:relationServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateRelationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenClient">
+<xs:sequence>
+<xs:element name="openClientQueryData" type="tns:openRelationQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="openRelationQueryData">
+<xs:sequence>
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="fromBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="fromBookyearPeriodNr" type="xs:int" />
+<xs:element name="toBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="toBookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenClientResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:openData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="openData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="creditBookingAmount" type="xs:double" />
+<xs:element name="creditDocumentAmount" type="xs:double" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="debetBookingAmount" type="xs:double" />
+<xs:element name="debetDocumentAmount" type="xs:double" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="expirationDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="openBookingAmount" type="xs:double" />
+<xs:element name="openDocAmount" type="xs:double" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateInvoice">
+<xs:sequence>
+<xs:element name="invoice" type="tns:invoiceServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateInvoiceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertInvoice">
+<xs:sequence>
+<xs:element name="invoice" type="tns:invoiceServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertInvoiceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedRelations">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedRelationsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedRelations" type="tns:relationServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="deletedRelations" type="tns:relationServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetProductGroups">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetProductGroupsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:productGroupServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="productGroupServiceData">
+<xs:sequence>
+<xs:element name="description" type="tns:stringServiceData" minOccurs="0" />
+<xs:element name="productGroupKey" type="tns:productGroupKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateCostcentre">
+<xs:sequence>
+<xs:element name="costcentre" type="tns:costCentreServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertUpdateCostcentreResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetBuySellBooking">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetBuySellBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:buySellBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buySellBookingServiceData">
+<xs:sequence>
+<xs:element name="amount" type="xs:double" />
+<xs:element name="bookingLines" type="tns:buySellBookingLineServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodeNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="expiryDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+<xs:element name="relationKey" type="tns:relationKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buySellBookingLineServiceData">
+<xs:sequence>
+<xs:element name="accountKey" type="xs:int" />
+<xs:element name="baseAmount" type="xs:double" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="costCentreKey" type="tns:costCentreKey" minOccurs="0" />
+<xs:element name="vatAmount" type="xs:double" />
+<xs:element name="vatCodeKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateDeliveryNote">
+<xs:sequence>
+<xs:element name="deliveryNote" type="tns:deliveryNoteServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateDeliveryNoteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedFinancialDiversBookings">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedFinancialDiversBookingsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedFinancialDiversBookingArray" type="tns:financialDiversBookingServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedBuySellBookings">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedBuySellBookingsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedBuySellBookingArray" type="tns:buySellBookingServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedDeliveryNotes">
+<xs:sequence>
+<xs:element name="modifiedSince" type="xs:dateTime" minOccurs="0" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetModifiedDeliveryNotesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+<xs:element name="modifiedDeliveryNoteArray" type="tns:deliveryNoteServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryAccount">
+<xs:sequence>
+<xs:element name="historyAccountQueryData" type="tns:historyAccountQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="historyAccountQueryData">
+<xs:sequence>
+<xs:element name="accountNr" type="xs:int" />
+<xs:element name="fromBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="fromBookyearPeriodNr" type="xs:int" />
+<xs:element name="toBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="toBookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryAccountResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:historyData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="historyData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="bookyearPeriodNr" type="xs:int" />
+<xs:element name="comment" type="xs:string" minOccurs="0" />
+<xs:element name="creditBookingAmount" type="xs:double" />
+<xs:element name="creditDocumentAmount" type="xs:double" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="debetBookingAmount" type="xs:double" />
+<xs:element name="debetDocumentAmount" type="xs:double" />
+<xs:element name="documentDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+<xs:element name="exchangeRate" type="xs:double" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="reference" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertBalancing">
+<xs:sequence>
+<xs:element name="balacing" type="tns:balancingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balancingServiceData">
+<xs:sequence>
+<xs:element name="balanceAmount" type="xs:double" />
+<xs:element name="creditKey" type="tns:balancingKeyServiceData" minOccurs="0" />
+<xs:element name="debetKey" type="tns:balancingKeyServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertBalancingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetJournals">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetJournalsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:journalServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="journalServiceData">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="closed" type="xs:boolean" />
+<xs:element name="closedPeriod" type="xs:int" />
+<xs:element name="currencyCode" type="xs:string" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="lastBookedDocumentNr" type="xs:int" />
+<xs:element name="name" type="xs:string" minOccurs="0" />
+<xs:element name="protectedPeriod" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryClient">
+<xs:sequence>
+<xs:element name="historyClientQueryData" type="tns:historyRelationQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="historyRelationQueryData">
+<xs:sequence>
+<xs:element name="externalRelationId" type="xs:int" />
+<xs:element name="fromBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="fromBookyearPeriodNr" type="xs:int" />
+<xs:element name="toBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="toBookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistoryClientResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:historyData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertBuySellBooking">
+<xs:sequence>
+<xs:element name="booking" type="tns:buySellBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertBuySellBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertDeliveryNote">
+<xs:sequence>
+<xs:element name="deliveryNote" type="tns:deliveryNoteServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertDeliveryNoteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistorySupplier">
+<xs:sequence>
+<xs:element name="historySupplierQueryData" type="tns:historyRelationQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportHistorySupplierResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:historyData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenSupplier">
+<xs:sequence>
+<xs:element name="openSupplierQueryData" type="tns:openRelationQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenSupplierResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:openData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetBookyears">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetBookyearsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:bookyearServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bookyearServiceData">
+<xs:sequence>
+<xs:element name="bookyearDescription" type="xs:string" minOccurs="0" />
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="closed" type="xs:boolean" />
+<xs:element name="endDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="periods" type="tns:bookyearPeriodServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="startDate" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bookyearPeriodServiceData">
+<xs:sequence>
+<xs:element name="bookyearPeriod" type="xs:int" />
+<xs:element name="endDate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="startDate" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateBuySellBooking">
+<xs:sequence>
+<xs:element name="booking" type="tns:buySellBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateBuySellBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Authenticate">
+<xs:sequence>
+<xs:element name="softwareHouseUuid" type="xs:string" minOccurs="0" />
+<xs:element name="credentials" type="tns:credentials" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AuthenticateResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetErrorDescription">
+<xs:sequence>
+<xs:element name="errorNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetErrorDescriptionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenAccount">
+<xs:sequence>
+<xs:element name="openAccountQueryData" type="tns:openAccountQueryData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="openAccountQueryData">
+<xs:sequence>
+<xs:element name="accountNr" type="xs:int" />
+<xs:element name="fromBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="fromBookyearPeriodNr" type="xs:int" />
+<xs:element name="toBookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="toBookyearPeriodNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetReportOpenAccountResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:openData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetVatCodes">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="GetVatCodesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vatCodeServiceData" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vatCodeServiceData">
+<xs:sequence>
+<xs:element name="basePercentage" type="xs:double" />
+<xs:element name="code" type="xs:string" minOccurs="0" />
+<xs:element name="description" type="xs:string" minOccurs="0" />
+<xs:element name="type" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetInvoice">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetInvoiceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:invoiceServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetFinancialDiversBooking">
+<xs:sequence>
+<xs:element name="bookyearKey" type="tns:bookyearKey" minOccurs="0" />
+<xs:element name="journalKey" type="xs:string" minOccurs="0" />
+<xs:element name="documentSequenceNr" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="GetFinancialDiversBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:financialDiversBookingServiceData" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

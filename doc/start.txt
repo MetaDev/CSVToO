@@ -1,0 +1,61 @@
+Step by Step
+
+1.
+Log in with your Octopus credentials
+
+-The application downloads all necessary data
+
+2.
+Choose a book year and and diary in which the new bookings will be uploaded
+
+-The application downloads all sales account numbers corresponding with chosen book year$
+
+3.
+Open the .csv file containing your sales (booking lines) exported in the correct format
+
+-The application shows a table with all imported booking lines from the .csv
+
+4.
+-When a row in the table is green, all fields are valid and the booking can be imported
+-When a field is invalid it's font is red or the cell is red.
+-All fields can be edited, an edited field has an blue font
+Resolve all invalid cells of every row by either editing it's value, choosing the correct value from the combobox or in the case of client mapping, 
+choosing a correct corresponding client from your Octopus account.
+
+5.
+When all rows are done press upload
+-The application shows a log of all data that will be uploaded, press "OK" if you are sure you want to upload
+-should an error occur, the user will be alerted and a log file saved. 
+Please close the application, no inconsistent data has been added to your Octopus account. 
+Contact the developer.
+
+A.
+Linking clients:
+Clients from the imported file have to be linked to clients from octopus.
+When clicking a cell in the column of Octopus client the user get's to choose between 
+existing clients, recently linked or created client or create a new client and use this.
+When pressing "Create new client" all necessary fields are completed by suggestions from suggestion mappings or data from the imported line.
+All client fields are checked for validity, if the client is created it will be uploaded with the new bookings to your account.
+successful
+
+B.
+suggestion mappings:
+To facilitate the translation process from sales to accounting some of the fields of bookings and clients will be filled by "suggestions".
+These values are saved in .csv files containing a mapping from an imported field to the corresponding suggestion for an unimported field.
+If a suggestion of a field fails in the table, the value will be the default (first) of the mapping and the font will be blue, as it was edited.
+
+
+
+Notes.
+
+Ocotpus:
+When the user starts to use the application all external ID's of it's relations should be 0.
+Don't edit your external ID of your relations in Octopus
+
+Import:
+CSV file requirements: all fields are seperated by a "," and quoted by '"'. E.g.  "test","othertest1","123"
+The columns of the file should be in the order:
+FactuurNummer, KlantID, Naam, StraatEnNummer, Postcode, Gemeente, Land, BTWNummer, FactuurDatum, VervalDatum, Referentie, BoekingBedragExclBTW, ShippingAndHandling, NrOfExperitiationDays, BTW6, BTW21
+
+Restrictions for each field
+...

@@ -1,0 +1,4 @@
+FactuurNummer;KlantID;Naam;StraatEnNummer;Postcode;Gemeente;LandCode;BTWNummer;FactuurDatum;VervalDatum;Opmerking;Referentie;BoekingBedragExclBTW;BTWCode;Betalingswijze
+OF141377;CARTAGENA;Cartagena Bvba;Wilde Heide 1;3150;Haacht;BE;BE0874022161;2/09/2014;2/10/2014;Leveringsbon - ODL141773 van 27/08/2014;mail 25.08;275,00  EUR;21;30DCF
+OF141378;MINTJENS;Mintjens bvba;Kerkstraat 21;2970;SCHILDE;BE;BE 0439.814.727;2/09/2014;2/10/2014;Leveringsbon - ODL141776 van 27/08/2014;Tel 26/8;302,50  EUR;21;30DCF
+OF141379;MAX&INE;MM Retail Bvba;Woodrow Wilsonplein 12;9000;Gent;BE;BE0892.329.526;2/09/2014;2/10/2014;Leveringsbon - ODL141810 van 28/08/2014;;299,00  EUR;21;30DCF

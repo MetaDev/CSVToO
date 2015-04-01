@@ -1,0 +1,130 @@
+voor paul
+
+
+-nieuwe klant suggestie wanneer er geen btw nr is
+
+-integreren nieuwe webservice
+
+-refactor by extending existing client and booking class (with field validation, auto-add to upload when edited,...)
+
+
+
+
+
+optional:
+-more flexible client linking, allowing link edits, only possible if ext id of oct client is independent from import id
+-give option to restore clientmapping by mapping all ext id's to import id's
+-bij het uploaden en dus ook het opslaan van de mapping sla je best een backup met timestamp om de versie aan te duiden op in een aparte map,
+dit om eventueel achteraf de mapping te herstellen
+-give option to reset mapping by setting all ext id's to 0 and erase mapping. 
+-show full text of cell and column in tooltip when hoovering
+-panel to edit suggestion mappings
+-support other delimiters and onclosure chars for csv
+-option to delete all ext id's of existing clients on first start up, if user used those in past
+-save if it's the first time or not, save standard  sales booking and journal 
+-ability to delete some mapping of clients
+-http exceptions opvangen en user kans geven om opnieuw te proberen (bij uploaden)
+-een static methode om een errorwindow op te roepen, deze window bestaat altijd, enkeld de tekst wordt aangepast.
+-als booking faalt, stoppen met uploaden en enkel de geslaagde boeking verwijderen uit de lijst, leg uit dat iets is misgelopen maar dat het programma niet weet wat
+als de gebruiker de fout vindt mag hij opnieuw proberen uploaden, anders screenshot maken en report sturen naar dev's
+
+
+-update webservice
+
+-general suggestion engine with mapping mechanism
+
+
+tests ontwerpen, gebruiken op test-dagboek: nieuwe klant linken, bestaande klant linken, meerdere links met dezelfde klant,...
+
+
+
+
+
+vragen ttn:
+-------------------------
+
+credit nota ? mail Octopus
+hoe?
+code octopus welke te nemen
+Opmerking:
+Indien u een credit nota maakt, dan dient u het totaal bedrag negatief te maken.
+De detail lijnen zijn dan wel positief als ze bijdragen tot de credit nota.
+Deze logica is identiek zoals bij ingave in de applicatie.
+
+Voorbeeld 1: Credit Nota van drankenhandelaar
+booking.setAmount(-121.0);
+line_1.setBaseAmount(200.0)
+line_1.setVatAmount(42.0)
+line_1.setComment("Teruggave Leeggoed");
+line_2.setBaseAmount(-100.0);
+line_2.setAmount(-21.0)
+line_2.setComment("Verkoop Frisdrank")
+
+
+Voorbeeld 2: Verkoop van drankenhandelaar met teruggave leeggoed
+booking.setAmount(121.0);
+line_1.setBaseAmount(200.0)
+line_1.setVatAmount(42.0)
+line_1.setComment("Verkoop Frisdrank");
+line_2.setBaseAmount(-100.0);
+line_2.setAmount(-21.0)
+line_2.setComment("Teruggave Leeggoed")
+
+periodes? zijn dat maanden? hoe moet ik weten welke periode?
+
+wat vind je van GUI?
+
+vragen Octopus
+---------------------
+
+testen, nieuw dagboek?
+
+totaal boeking automatisch of niet gecalculeerd
+
+
+future functionality
+------------------------------
+
+
+if clientmapping is incorrect the user should have the option to restore it
+show unlinked clients and list with existing clients to link with
+->can only happen is an Octopus client has an ext id and isn't mapped yet
+
+gebruik hiervoor java preferences
+a config panel where all constants can be modfied, like bookingyear, gui color, ...
+
+custom dossier when logging in
+upon start let the user choose journal and corresponding bookyear
+
+a custom dagboek mapping, changing money code, exchange rate,...
+
+de dropdown lijst van  alle Ocotpus klanten alfabetisch of best match ordenen
+
+custom date format
+
+give the user the choice which fields that aren't non-optional for booking can be added to auto complete new clietn fields
+custom number of optional import fields
+
+Meerdere talen voor gui, frans engels nederlands
+
+save octopus password and username in encrypted file, or ask on opening of app
+
+gui tweaking, prettier, tabel editing more human, enter lose focus ...
+
+load all money code (eur,us,...) from Oct and add as default moneycode option 
+
+custom VAT percentage
+
+add tooltip to tabel cells  //Set up tool tips for the sport cells.
+        DefaultTableCellRenderer renderer =
+                new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click for combo box");
+
+refactor: create wrapper around servicedata objects that initialises and edits them with string parameters and conversion logic
+
+custom bookyear
+
+alert user when error occurs (conversion error, Octopus error,login error, ...)
+
+boekingen gesorteerd uitprinten bij upload
+optie om clientmapping te wissen als er een fout optreedt met de octopus external id

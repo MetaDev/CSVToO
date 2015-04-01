@@ -1,0 +1,29 @@
+In SalesForce
+Export a rapport with the same fields as Harald Rapport, with the option to export as .csv with comma's (non regional)
+field order (mandatory): bookingID, clientID (auto increment, integer only, id), clientName, cleintStreet, clientCountry, clientPostalcode,
+clientCity, BTWNumber (tax number), telephoneNumber, faxNumber, Quarter, bookingDate, expiration date, comment, reference (?), bookingAmount, moneyCode
+
+Ik kan u ook nog aanraden om een apart dagboek te gebruiken; zodat dit niet/of toch weinig wordt geopend door de andere gebruikers via de applicatie.
+
+Er kan namelijk slechts één gebruiker per keer in het dagboek werken.
+
+ 
+
+
+In SFToOct
+-All csv files need to be in UTF-8 without BOM, java doesn't like BOM, encoding
+
+
+Client id should be an Integer unique and start from 1
+
+all info used to create bookings from import to Octopus comes from the import csv
+no data except constants are used from Octopus.
+Meaning, if for example a client has a certain name from the import different from the corresponding name in Octopus then it's the import name that will be used
+this for the reason that some clients from the import are mapped to a single client in Octopus
+
+note all format rules that apply on field: dates, doubles,... also in app
+
+a cell has a yellow font if it contains data that's not conform with import or suggestions (either changed by user or, the suggestion failed)
+
+all change to clients and new clients is not permanent until the end button is pressed
+
