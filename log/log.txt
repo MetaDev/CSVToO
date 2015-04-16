@@ -159,3 +159,303 @@ comment: bestelling M. Prins 31.7; Max Vitaal
 
 
 
+Thu Apr 16 15:55:54 CEST 2015Client Mediotheek Bond Moyson NR 67
+Adress: , null   
+Info: booking account: 0; Vat type: 1
+
+
+Client Apotheek Bobbaers NR 144
+Adress: DONKSESTEENWEG 242, Brasschaat BE
+Info: booking account: 700000; Vat type: 1
+
+
+Client Max Vitaal NR 147
+Adress: de Deel 12, Emmeloord NL
+Info: booking account: 700400; Vat type: 4
+
+
+Booking for Thuiszorgwinkel hq Midden Vlaanderen CVBA with number: 5
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127.40 Euro
+
+Line;
+base amount: 15.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97.90 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14.50 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for Max Vitaal with number: 6
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12.01 Euro
+
+Line;
+base amount: 10.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2.01 Euro; vat amount: 0.00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for Cap Autonomie hq with number: 7
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634.61 Euro
+
+Line;
+base amount: 30.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604.61 Euro; vat amount: 0.00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Thu Apr 16 16:00:34 CEST 2015Client Tousergo - Self Confort NR 147
+Adress: 93 Avenue d'Amsterdam Zac Ravennes les Francs, Bondues FR
+Info: booking account: 700100; Vat type: 4
+
+
+Client Apotheek Bobbaers NR 67
+Adress: DONKSESTEENWEG 242, Brasschaat BE
+Info: booking account: 700000; Vat type: 1
+
+
+Client Mediotheek Bond Moyson NR 144
+Adress: , null   
+Info: booking account: 0; Vat type: 1
+
+
+Booking for Tousergo - Self Confort with number: 5
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127.40 Euro
+
+Line;
+base amount: 15.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97.90 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14.50 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for  Blessurotheek - Roobrouck with number: 6
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12.01 Euro
+
+Line;
+base amount: 10.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2.01 Euro; vat amount: 0.00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for Cap Autonomie hq with number: 7
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634.61 Euro
+
+Line;
+base amount: 30.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604.61 Euro; vat amount: 0.00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Thu Apr 16 16:08:02 CEST 2015Client Cap Vital Sante Lyon - Sante et reconfort NR 147
+Adress: 110 Avenue Paul Santy, Lyon FR
+Info: booking account: 700100; Vat type: 4
+
+
+Client Mediotheek Bond Moyson NR 67
+Adress: , null   
+Info: booking account: 0; Vat type: 1
+
+
+Client Apotheek Bobbaers NR 144
+Adress: DONKSESTEENWEG 242, Brasschaat BE
+Info: booking account: 700000; Vat type: 1
+
+
+Booking for Acomodo - Qualiadapte with number: 5
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127.40 Euro
+
+Line;
+base amount: 15.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97.90 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14.50 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for  Blessurotheek - Roobrouck with number: 6
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12.01 Euro
+
+Line;
+base amount: 10.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2.01 Euro; vat amount: 0.00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for Cap Vital Sante Lyon - Sante et reconfort with number: 7
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634.61 Euro
+
+Line;
+base amount: 30.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604.61 Euro; vat amount: 0.00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Thu Apr 16 16:12:00 CEST 2015Client Mediotheek Bond Moyson NR 67
+Adress: , null   
+Info: booking account: 0; Vat type: 1
+
+
+Client Apotheek Bobbaers NR 144
+Adress: DONKSESTEENWEG 242, Brasschaat BE
+Info: booking account: 700000; Vat type: 1
+
+
+Booking for Acomodo - Qualiadapte with number: 5
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127.40 Euro
+
+Line;
+base amount: 15.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97.90 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14.50 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for  Blessurotheek - Roobrouck with number: 6
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12.01 Euro
+
+Line;
+base amount: 10.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2.01 Euro; vat amount: 0.00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for  Blessurotheek - Roobrouck with number: 7
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634.61 Euro
+
+Line;
+base amount: 30.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604.61 Euro; vat amount: 0.00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+
+Thu Apr 16 16:13:50 CEST 2015Client Max Vitaal NR 151
+Adress: de Deel 12, Emmeloord NL
+Info: booking account: 700400; Vat type: 4
+
+
+Client Apotheek Bobbaers NR 67
+Adress: DONKSESTEENWEG 242, Brasschaat BE
+Info: booking account: 700000; Vat type: 1
+
+
+Client Mediotheek Bond Moyson NR 144
+Adress: , null   
+Info: booking account: 0; Vat type: 1
+
+
+Client Tousergo - Self Confort NR 147
+Adress: 93 Avenue d'Amsterdam Zac Ravennes les Francs, Bondues FR
+Info: booking account: 700100; Vat type: 4
+
+
+Booking for Tousergo - Self Confort with number: 5
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: 3718
+total amount: 127.40 Euro
+
+Line;
+base amount: 15.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Tousergo - Self Confort
+Line;
+base amount: 97.90 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+Line;
+base amount: 14.50 Euro; vat amount: 0.00 Euro
+comment: 3718; Tousergo - Self Confort
+
+
+
+Booking for Max Vitaal with number: 6
+date: 21/8/2014; expiry date: 5/9/2014 perdiod: 201408
+reference: bestelling M. Prins 31.7
+total amount: 12.01 Euro
+
+Line;
+base amount: 10.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Max Vitaal
+Line;
+base amount: 2.01 Euro; vat amount: 0.00 Euro
+comment: bestelling M. Prins 31.7; Max Vitaal
+
+
+
+Booking for  Blessurotheek - Roobrouck with number: 7
+date: 21/8/2014; expiry date: 20/9/2014 perdiod: 201408
+reference: commande M. Lapierre 11.8
+total amount: 1634.61 Euro
+
+Line;
+base amount: 30.00 Euro; vat amount: 0.00 Euro
+comment: Shipping and Handling; Cap Vital Sante Lyon - Sante et reconfort
+Line;
+base amount: 1604.61 Euro; vat amount: 0.00 Euro
+comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
+
+
+

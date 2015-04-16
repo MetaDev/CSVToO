@@ -1,3 +1,7 @@
+plant link suggest op basis van BTW
+deels opslaan van klanten links als een deel van de boekingen geslaagd is.
+enkel nieuwe link in clientMap opslaan als klant in Octopus geupload is, dus als een fout optreedt in de boekingen mogen al de links opgeslaan worden
+
 voor paul
 
 

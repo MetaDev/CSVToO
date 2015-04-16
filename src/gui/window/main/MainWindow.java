@@ -27,8 +27,6 @@ public class MainWindow {
 
     final static JFrame window = new JFrame("Octopus Sales import");
 
-    ;
-
 	public static void main(String[] a) {
         try {
             initGUIAndConfig();
@@ -50,14 +48,14 @@ public class MainWindow {
     }
 
     public static void close() {
-        SwingUtilities.invokeLater(new Runnable() {
+        (new Runnable() {
             @Override
             public void run() {
                 window.setVisible(false); // you can't see me!
                 window.dispose(); // Destroy the JFrame object
                 System.exit(0);
             }
-        });
+        }).run();
     }
 
     private static void initGUIAndConfig() {

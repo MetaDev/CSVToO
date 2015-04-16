@@ -12,9 +12,8 @@ public abstract class WSAcces {
 	public String getMessage() {
 		return message;
 	}
-
-	public Object execute(OctopusWS webService) {
-		return null;
+        
+	public void execute(OctopusWS webService) {
 	};
 
 	public static WSAcces getInstance() {
