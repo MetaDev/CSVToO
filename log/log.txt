@@ -159,3 +159,8 @@ comment: bestelling M. Prins 31.7; Max Vitaal
 
 
 
+Thu Apr 16 16:34:03 CEST 2015java.lang.NullPointerException
+	at gui.window.config.ChooseBookYearJournalWindow.<init>(ChooseBookYearJournalWindow.java:39)
+	at gui.window.config.LoginWindow.open(LoginWindow.java:75)
+	at gui.window.main.MainWindow.initGUIAndConfig(MainWindow.java:80)
+	at gui.window.main.MainWindow.main(MainWindow.java:36)

@@ -107,11 +107,6 @@ public class EndButton extends JButton implements ActionListener {
                                     WSCommunicator.loginAndExecute(WSAFlush
                                             .getInstance());
 
-//only save local AFTER online flush succeed
-                                    // save new linked clients to local config mapping
-                                    // file
-                                    SToAClient.saveAllLinkedClients();
-
                                     return null;
                                 }
                             };

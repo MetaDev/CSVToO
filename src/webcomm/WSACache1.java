@@ -56,7 +56,7 @@ public class WSACache1 extends WSAcces {
 			vatCodesMap.put(vatCodes.get(i).getCode(), vatCodes.get(i));
 		}
 		CacheModel.setVatCodes(vatCodesMap);
-		return null;
+                return null;
 	}
 
 	public static WSAcces getInstance() {
