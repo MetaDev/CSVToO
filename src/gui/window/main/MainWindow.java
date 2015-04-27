@@ -41,6 +41,7 @@ public class MainWindow {
 				PrintWriter pw = new PrintWriter(sw);
 				e.printStackTrace(pw);
 				String errorStack = sw.toString(); // stack trace as a string
+                                OKNotificationWindow.init(window);
 				OKNotificationWindow
 						.openError("An error occured causing the application to crash.\n"
 								+ "A log has been saved.\n"

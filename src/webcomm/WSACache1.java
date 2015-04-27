@@ -31,7 +31,7 @@ public class WSACache1 extends WSAcces {
 
 	// cache
 	@Override
-	public Object execute(OctopusWS webService) {
+	public void execute(OctopusWS webService) {
 		// retrieve all relations
 		// filter out the relations that aren't needed, we only need clients
 		Set<RelationServiceData> octClients = new HashSet<>();
@@ -56,7 +56,6 @@ public class WSACache1 extends WSAcces {
 			vatCodesMap.put(vatCodes.get(i).getCode(), vatCodes.get(i));
 		}
 		CacheModel.setVatCodes(vatCodesMap);
-                return null;
 	}
 
 	public static WSAcces getInstance() {

@@ -19,7 +19,7 @@ public class WSACache2 extends WSAcces {
 	}
 
 	@Override
-	public Object execute(OctopusWS port) {
+	public void execute(OctopusWS port) {
 
 		BookyearServiceData bookYear = AppConstants.getActiveBookYear();
 
@@ -40,7 +40,6 @@ public class WSACache2 extends WSAcces {
 			}
 		}
 		CacheModel.setSalesBookingAccounts(bookingAcounts);
-                return null;
 	}
 
 	public static WSAcces getInstance() {

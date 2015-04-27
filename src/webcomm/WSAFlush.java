@@ -33,7 +33,7 @@ public class WSAFlush extends WSAcces {
 
     // flush
     @Override
-    public Object execute(OctopusWS webService) {
+    public void execute(OctopusWS webService) {
         String logText = "";
         List<String> failedUploadClients = new ArrayList<>();
 
@@ -113,6 +113,5 @@ public class WSAFlush extends WSAcces {
                     .openError("The upload was successful.\nPLease close application.");
             MainWindow.close();
         }
-        return null;
     }
 }

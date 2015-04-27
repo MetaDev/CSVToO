@@ -13,9 +13,7 @@ public abstract class WSAcces {
 		return message;
 	}
 
-	public Object execute(OctopusWS webService) {
-            return null;
-	};
+	public void execute(OctopusWS webService){};
 
 	public static WSAcces getInstance() {
 		return null;
