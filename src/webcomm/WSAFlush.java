@@ -110,7 +110,7 @@ public class WSAFlush extends WSAcces {
             AppUtil.saveToLog(logText);
         } else {
             OKNotificationWindow
-                    .openError("The upload was successful.\nPLease close application.");
+                    .openWarning("The upload was successful.\nPLease close application.");
             MainWindow.close();
         }
     }
