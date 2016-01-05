@@ -101,17 +101,17 @@ public class SToABooking {
             // calculate from the booking amount and VAT %
             String vatCodeKey = line
                     .getBookingLineField(BookingLineFields.BTWCode);
-			// booking lines are positive because all credit notes and regular
+            // booking lines are positive because all credit notes and regular
             // bookings are done seperately
 
-            double baseAmount = 0;
+            double amount = 0;
             try {
-                baseAmount = Math
-                        .abs(SToAField.parseDouble((line
-                                        .getBookingLineField(BookingLineFields.BoekingBedragExclBTW))));
+                amount = SToAField.parseDouble((line
+                                        .getBookingLineField(BookingLineFields.BoekingBedragExclBTW)));
             } catch (NumberFormatException | ParseException ex) {
                OKNotificationWindow.openError("Booking: "+factuurnNNr+" has an unreadable booking amount. Please close app and change amount into correct format.");
             }
+            double baseAmount = Math.abs(amount);
             double vatAmount = SToABooking.getBookingVatAmount(baseAmount,
                     vatCodeKey);
             int acctKey = Integer.parseInt(line
@@ -121,7 +121,7 @@ public class SToABooking {
                     .getBookingLine(acctKey, baseAmount, vatAmount, vatCodeKey,
                             line.getBookingLineField(BookingLineFields.Referentie) + "; " + line.getClientField(ClientFields.Naam));
 
-            boolean isCreditNote = baseAmount < 0;
+            boolean isCreditNote = amount < 0;
 
             // add line to booking and update booking total
             WSDataObjectCreator.addBookingLineToBookingAndUpdateBookingAmount(booking, bookingLine, isCreditNote);
@@ -171,7 +171,7 @@ public class SToABooking {
     }
 
     public static double roundForVATAmount(double notRoundedVatAmount) {
-        return Math.round(notRoundedVatAmount * 100.0) / 100.0;
+        return Math.round(notRoundedVatAmount * 100.0d) / 100.0d;
     }
 
 }

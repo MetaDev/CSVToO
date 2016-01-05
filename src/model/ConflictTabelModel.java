@@ -109,8 +109,9 @@ public class ConflictTabelModel extends DefaultTableModel {
                 String sAndHPrice = line[ImportFields.ShippingAndHandling
                         .ordinal()];
                 String bookingNr = line[ImportFields.FactuurNummer.ordinal()];
+                //shipping and handling can be credit note thus different from 0
                 try {
-                    if (SToAField.parseDouble(sAndHPrice) > 0
+                    if (SToAField.parseDouble(sAndHPrice) != 0
                             && !shippingAndHandlingForBookingNrs
                             .contains(bookingNr)) {
                         shippingAndHandlingForBookingNrs.add(bookingNr);
