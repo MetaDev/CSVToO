@@ -60,6 +60,7 @@ public class ConflictTabelModel extends DefaultTableModel {
 	}
 
 	public boolean validImportBooking(String factuurNr, String amount) {
+            System.out.println(factuurNr + " "+ amount);
 		return !factuurNr.equals("") && SToAField.parseDouble(amount) != 0;
 	}
 
