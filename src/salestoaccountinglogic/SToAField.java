@@ -1,5 +1,6 @@
 package salestoaccountinglogic;
 
+import gui.component.custom.OKNotificationWindow;
 import io.FileHandler;
 
 import java.text.DateFormat;
@@ -101,12 +102,7 @@ public class SToAField {
         return SToAField.Language.values()[languageCode].name();
     }
 
-    public static String getCountryCodeFromBTWNr(String BTWNr) {
-        if (BTWNr.length() >= 2) {
-            return BTWNr.substring(0, 2);
-        }
-        return "";
-    }
+  
 
     public static String getCountryCodeFromCountryName(String countryName) {
         if (countryCodeMapping.containsKey(countryName)) {
@@ -118,7 +114,12 @@ public class SToAField {
     public static boolean isAlphaNumeric(String s) {
         return s.matches("^[a-zA-Z0-9]*$");
     }
-
+ public static String getCountryCodeFromBTWNr(String BTWNr) {
+        if (BTWNr.length() >= 2) {
+            return BTWNr.substring(0, 2);
+        }
+        return "";
+    }
     public static boolean isBTWNumber(String BTWNr) {
         if (BTWNr.length() < 2) {
             return false;
@@ -149,7 +150,18 @@ public class SToAField {
         } // 1 block of 8 digits LU99999999
         else if (countryCode.equals("LU")) {
             return BTWNr.matches("^LU[0-9]{8}$");
-        } // particulier so no BTW number, but it can't be empty
+        } // 12 characters
+        else if (countryCode.equals("SE")) {
+            return BTWNr.matches("^SE[0-9]{12}$");
+       }
+        else if (countryCodeMapping.containsValue(getCountryCodeFromBTWNr(BTWNr))){
+            if (!AppConstants.BTWFormatNotSupportedMessage){
+                OKNotificationWindow.openError("Country code found: " + getCountryCodeFromBTWNr(BTWNr)+ " but the BTW format is not supported, contact developper.");
+                AppConstants.BTWFormatNotSupportedMessage=true;
+            }
+            return true;
+        }
+        // particulier so no BTW number, but it can't be empty
         else {
             return isBTWNrParticulier(BTWNr);
         }

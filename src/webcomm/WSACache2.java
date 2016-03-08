@@ -39,6 +39,7 @@ public class WSACache2 extends WSAcces {
 						accounts.get(i));
 			}
 		}
+                System.out.println(bookingAcounts);
 		CacheModel.setSalesBookingAccounts(bookingAcounts);
 	}
 

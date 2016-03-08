@@ -91,10 +91,12 @@ public class ConflictTabelRow {
 				.getBookingAccountSuggestion(bookingLineFields[BookingLineFields.LandCode
 						.ordinal()]);
 		// if booking account not exists in account
-		if (!CacheModel.getSalesBookingAccounts().keySet()
+           
+		if (bookingAccount==null || !CacheModel.getSalesBookingAccounts().keySet()
 				.contains(bookingAccount)) {
 			bookingAccount = CacheModel.getSalesBookingAccounts().keySet()
 					.toArray(new String[] {})[0];
+                        //set booking account column as modified
 			this.modifiedColumns[BookingLineFields.BookingAccountKey.ordinal()] = 1;
 		}
 		bookingLineFields[BookingLineFields.BookingAccountKey.ordinal()] = bookingAccount;

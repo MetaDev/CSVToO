@@ -22,7 +22,7 @@ public class AppConstants {
 	public static String logDir = "log";
 	private static JournalServiceData activeJournal;
 	private static BookyearServiceData activeBookYear;
-
+        public static boolean BTWFormatNotSupportedMessage=false;
 	public static void setActiveBookYearAndJournal(
 			BookyearServiceData activeBookYear, JournalServiceData journal) {
 		AppConstants.activeJournal = journal;

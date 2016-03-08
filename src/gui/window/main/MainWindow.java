@@ -59,6 +59,9 @@ public class MainWindow {
     }
 
     private static void initGUIAndConfig() {
+        // init gui pop-ups
+        OKNotificationWindow.init(window);
+        OKCancelNotificationWindow.init(window);
         // initialise mapping stored in config files
         SToAConfig.init();
 
@@ -73,9 +76,7 @@ public class MainWindow {
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });
-        // init gui pop-ups
-        OKNotificationWindow.init(window);
-        OKCancelNotificationWindow.init(window);
+        
         // login and cache necessary account data
         if (!new LoginWindow().open(window)) {
             close();
