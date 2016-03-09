@@ -156,7 +156,7 @@ public class SToAField {
        }
         else if (countryCodeMapping.containsValue(getCountryCodeFromBTWNr(BTWNr))){
             if (!AppConstants.BTWFormatNotSupportedMessage){
-                OKNotificationWindow.openError("Country code found: " + getCountryCodeFromBTWNr(BTWNr)+ " but the BTW format is not supported, contact developper.");
+                OKNotificationWindow.openError("Country code found: " + getCountryCodeFromBTWNr(BTWNr)+ " but the BTW format is not supported, contact developper.",true);
                 AppConstants.BTWFormatNotSupportedMessage=true;
             }
             return true;

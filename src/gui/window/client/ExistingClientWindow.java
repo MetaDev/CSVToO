@@ -38,7 +38,7 @@ public class ExistingClientWindow extends JPanel {
 	public void open(JFrame parent, int row, int column,
 			Collection<RelationServiceData> clients, ConflictTabelModel model) {
 		if (clients.isEmpty()) {
-			OKNotificationWindow.openError("No clients found.");
+			OKNotificationWindow.openError("No clients found.",false);
 			return;
 		}
 
@@ -84,7 +84,7 @@ public class ExistingClientWindow extends JPanel {
 					.getSelectedIndex()]);
 			// if client not valid
 			if (!SToAClient.clientIsValid(selectedOctClient)) {
-				OKNotificationWindow.openError("One or more fields for client are invalid.");
+				OKNotificationWindow.openError("One or more fields for client are invalid.",false);
 				return;
 			}
 			// add new ID mapping to config mapping file

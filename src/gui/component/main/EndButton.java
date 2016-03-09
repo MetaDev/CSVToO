@@ -59,7 +59,7 @@ public class EndButton extends JButton implements ActionListener {
             } else {
                 OKNotificationWindow
                         .openError("Some fields in the bookinglines are invalid, please correct them all before uploading.\n"
-                                + "Check the cells with a red background.");
+                                + "Check the cells with a red background.",false);
                 return;
             }
         }
@@ -89,6 +89,8 @@ public class EndButton extends JButton implements ActionListener {
 
         // open warning window asking user confirmation
         if (OKCancelNotificationWindow.open(warningText)) {
+            //this new thread complicates the opening of a pop-up window which introduced the newThread argument in the method
+            //for use elsewhere
             new Thread(new Runnable() {
 
                 @Override

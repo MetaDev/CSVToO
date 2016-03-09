@@ -42,7 +42,7 @@ public class MainWindow {
             OKNotificationWindow
                     .openError("An error occured causing the application to crash.\n"
                             + "A log has been saved.\n"
-                            + "Try to restart the application, if this fails contact developper.");
+                            + "Try to restart the application, if this fails contact developper.",false);
             AppUtil.saveToLog(errorStack);
         }
     }

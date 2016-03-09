@@ -60,7 +60,7 @@ public class WSAFlush extends WSAcces {
                                     + AppUtil.printRelation(relation)
                                     + "\nA new log file has been created with all data concerning the upload error.\n"
                                     + "Your Octopus account will not suffer from inconsistent data.\n"
-                                    + "Please contact developper for further help.");
+                                    + "Please contact developper for further help.",false);
                     // save all upload data and the client or booking that
                     // caused the error in a log file
                     logText += "------------------------------------------------------\n";
@@ -96,7 +96,7 @@ public class WSAFlush extends WSAcces {
                                     + AppUtil.printBooking(booking)
                                     + "\nA new log file can be created with all data concerning the upload error.\n"
                                     + "Your Octopus account will not suffer from inconsistent data.\n"
-                                    + "Please contact developper for further help, enclose saved log file in attachments.");
+                                    + "Please contact developper for further help, enclose saved log file in attachments.",false);
                     // save all upload data and the client or booking that
                     // caused
                     // the error in a log file
@@ -112,11 +112,11 @@ public class WSAFlush extends WSAcces {
         if (error) {
             AppUtil.saveToLog(logText);
             OKNotificationWindow
-                    .openWarning("The upload was (partly) unsuccesful.\nThe application will close.");
+                    .openWarning("The upload was (partly) unsuccesful.\nThe application will close.",false);
         } else {
             // show window, upload complete, please close application
             OKNotificationWindow
-                    .openWarning("The upload was successful.\nThe application will close.");
+                    .openWarning("The upload was successful.\nThe application will close.",false);
 
         }
         MainWindow.close();

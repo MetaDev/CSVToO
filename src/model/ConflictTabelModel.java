@@ -73,7 +73,7 @@ public class ConflictTabelModel extends DefaultTableModel {
         try {
             return !factuurNr.equals("") && SToAField.parseDouble(amount) != 0;
         } catch (NumberFormatException | ParseException ex) {
-            OKNotificationWindow.openError("Booking: " + factuurNr + " has an unreadable booking amount. Please close app and change amount into correct format.");
+            OKNotificationWindow.openError("Booking: " + factuurNr + " has an unreadable booking amount. Please close app and change amount into correct format.",false);
             return false;
         }
     }
@@ -85,13 +85,13 @@ public class ConflictTabelModel extends DefaultTableModel {
         if (allRows == null || allRows.isEmpty()) {
             OKNotificationWindow
                     .openError("Something went wrong when filling the table with data from the csv file.\n"
-                            + "Please check if your csv file corresponds to all requirements.");
+                            + "Please check if your csv file corresponds to all requirements.",false);
             return;
         }
         if (allRows.get(0).length != ImportFields.values().length) {
             OKNotificationWindow
                     .openError("Something went wrong when filling the table with data from the csv file.\n"
-                            + "Your csv has the wrong number of columns.");
+                            + "Your csv has the wrong number of columns.",false);
             return;
         }
 
@@ -119,7 +119,7 @@ public class ConflictTabelModel extends DefaultTableModel {
                         newRows.add(newRow);
                     }
                 } catch (NumberFormatException | ParseException ex) {
-                    OKNotificationWindow.openError("Booking: " + bookingNr + " has an unreadable shipping amount. Please close app and change amount into correct format.");
+                    OKNotificationWindow.openError("Booking: " + bookingNr + " has an unreadable shipping amount. Please close app and change amount into correct format.",false);
                 }
 
                 newRow = new ConflictTabelRow(line, false);

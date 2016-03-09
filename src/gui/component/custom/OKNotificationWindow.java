@@ -21,26 +21,38 @@ public class OKNotificationWindow {
         window.add(scrollPane);
     }
 
-    public static void openError(String message) {
+    public static void openError(String message, boolean newThread) {
         textArea.setText(message);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JOptionPane.showConfirmDialog(parent, window, "Error",
-                        JOptionPane.PLAIN_MESSAGE);
-            }
-        });
+        if (newThread) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showConfirmDialog(parent, window, "Error",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+            });
+        } else {
+            JOptionPane.showConfirmDialog(parent, window, "Error",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
-    public static void openWarning(String message) {
+    //if already in another thread no new thread should be spawned
+
+    public static void openWarning(String message, boolean newThread) {
         textArea.setText(message);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JOptionPane.showConfirmDialog(parent, window, "Warning",
-                        JOptionPane.PLAIN_MESSAGE);
-            }
-        });
+        if (newThread) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showConfirmDialog(parent, window, "Warning",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+            });
+        } else {
+            JOptionPane.showConfirmDialog(parent, window, "Warning",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
 }

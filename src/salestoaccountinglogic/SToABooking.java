@@ -109,7 +109,7 @@ public class SToABooking {
                 amount = SToAField.parseDouble((line
                                         .getBookingLineField(BookingLineFields.BoekingBedragExclBTW)));
             } catch (NumberFormatException | ParseException ex) {
-               OKNotificationWindow.openError("Booking: "+factuurnNNr+" has an unreadable booking amount. Please close app and change amount into correct format.");
+               OKNotificationWindow.openError("Booking: "+factuurnNNr+" has an unreadable booking amount. Please close app and change amount into correct format.",false);
             }
             double baseAmount = Math.abs(amount);
             double vatAmount = SToABooking.getBookingVatAmount(baseAmount,

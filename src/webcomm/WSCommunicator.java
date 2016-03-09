@@ -37,7 +37,7 @@ public class WSCommunicator {
 			} catch (MalformedURLException e1) {
 				return null;
 			} catch (javax.xml.ws.WebServiceException e2) {
-				OKNotificationWindow.openError("Something went wrong when trying to connect to webservice: "+e2.getMessage());
+				OKNotificationWindow.openError("Something went wrong when trying to connect to webservice: "+e2.getMessage(),false);
 				return null;
 			}
 			// Sta cookies toe
@@ -56,12 +56,12 @@ public class WSCommunicator {
 			returnValue = port.authenticate(devauth,cred);
 			if (returnValue != 0) {
 				OKNotificationWindow.openError("login failed because: "
-						+ port.getErrorDescription(returnValue));
+						+ port.getErrorDescription(returnValue),false);
 				return null;
 			}
 			return port;
 		} catch (Exception e) {
-			OKNotificationWindow.openError("An error occured: " + e.getMessage());
+			OKNotificationWindow.openError("An error occured: " + e.getMessage(),false);
 			return null;
 		}
 	}
