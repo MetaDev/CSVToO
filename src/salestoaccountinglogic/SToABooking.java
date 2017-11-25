@@ -16,18 +16,19 @@ import model.AppConstants;
 import model.CacheModel;
 import model.ConflictTabelRow;
 import salestoaccountinglogic.SToAClient.ClientFields;
+import util.AppUtil;
 import webcomm.WSDataObjectCreator;
 
 import webcomm.octws.BuySellBookingLineServiceData;
 import webcomm.octws.BuySellBookingServiceData;
+import webcomm.octws.RelationServiceData;
 
 public class SToABooking {
 
     // all fields for a booking line shown in Conflict table
-
     public enum BookingLineFields {
 
-        FactuurNummer, KlantID, Naam, BTWNummer, LandCode, FactuurDatum, VervalDatum, Referentie, BoekingBedragExclBTW, NrOfExperitiationDays, OctopusClient, BTWCode, BookingAccountKey
+        FactuurNummer, CreditNotaNummer, KlantID, Naam, BTWNummer, LandCode, FactuurDatum, VervalDatum, Referentie, BoekingBedragExclBTW, NrOfExperitiationDays, OctopusClient, BTWCode, BookingAccountKey
     }
 
     public enum ExperiationType {
@@ -42,7 +43,7 @@ public class SToABooking {
                 return false;
             }
         }
-		//extra logic
+        //extra logic
         //expiry date is after document date
         Date docDate = SToAField.parseDate(row.getBookingLineField(BookingLineFields.FactuurDatum));
         Date expDate = SToAField.parseDate(row.getBookingLineField(BookingLineFields.VervalDatum));
@@ -51,17 +52,73 @@ public class SToABooking {
         }
         return true;
     }
+//format: factuurnummer, booking nummer, factuur VAT, booking VAT, SF ID, SF to oct mapped ID, VAT mapped oct ID
+    public static String checkBooking( ConflictTabelRow line, BuySellBookingServiceData booking) {
+        String logtext="";
+        //check equality
+        String importVAT = line.getBookingLineField(SToABooking.BookingLineFields.BTWNummer);
+        String clientVAT = SToAField.removeDots(SToAClient.getClientFromExtID(booking.getExternalRelationId()).getVatNr());
+        boolean vatEquals= importVAT.equals(clientVAT);
+        //only retrun a warning text when there is a VAT mismatch
+        if (vatEquals){
+            return null;
+        }
+        String SFID = line.getBookingLineField(SToABooking.BookingLineFields.KlantID);
+        String OctID = SToAClient.getExternalOctopusID(SFID) + "";
+        //if client exist
+        logtext += "SF ID: " + SFID + "; mapped Oct ext ID: " + OctID ;
+        logtext+="\n";
+        logtext+="the salesforce line has name: "+line.getBookingLineField(SToABooking.BookingLineFields.Naam);
+        logtext+="\n";
+        logtext+= "the mapped oct ext id corresponds to name: " +SToAClient.getClientFromExtID(OctID).getName();
+        logtext+="\n";
+        RelationServiceData test=SToAClient.getClientByVATNr(importVAT);
+        if(test!=null){
+            logtext+= "the VAT from the booking line maps to the name: " + test.getName();
+            logtext+="\n";
+        }
+        return logtext;
+   }
+    //format: factuurnummer, booking nummer, factuur VAT, booking VAT, SF ID, SF to oct mapped ID, VAT mapped oct ID
+    static void addBookingToLog(String logtext, ConflictTabelRow line, BuySellBookingServiceData booking) {
+        logtext += "factuur nr: " + line.getBookingLineField(BookingLineFields.FactuurNummer);
+        logtext += "booking nr: " + booking.getDocumentSequenceNr()+"\n";
+        //check equality
+        String importVAT = line.getBookingLineField(SToABooking.BookingLineFields.BTWNummer);
+        String clientVAT = SToAField.removeDots(SToAClient.getClientFromExtID(booking.getExternalRelationId()).getVatNr());
+        logtext += importVAT.equals(clientVAT) ? "VAT matches\n" : "Error VAT does not match\n";
+        logtext += "factuur VAT nr: " + importVAT + " oct booking VAT nr: " + clientVAT + "\n";
+        String SFID = line.getBookingLineField(SToABooking.BookingLineFields.KlantID);
+        String OctID = SToAClient.getExternalOctopusID(SFID) + "";
+        //if client exist
+        RelationServiceData test=SToAClient.getClientByVATNr(importVAT);
+        
+        logtext += "SF ID: " + SFID + "SF mapped Oct ext ID: " + OctID ;
+        logtext+=" SF mapped Oct internal ID: " + SToAClient.getClientFromExtID(OctID).getRelationKey().getId();
+        logtext+="\n";
+        if(test!=null){
+            String vatMappedOctID = SToAClient.getClientByVATNr(importVAT).getExternalRelationNr() + "";
+            logtext+= " VAT mapped ext Oct ID: " + vatMappedOctID;
+            logtext+= " VAT mapped int Oct ID: " + SToAClient.getClientByVATNr(importVAT).getRelationKey().getId();
+            
+        }
+        logtext+= "\n";
+        System.out.println(logtext);
+    }
 
-	// parse all bookings with only valid fields and convert to a mapping
+    // parse all bookings with only valid fields and convert to a mapping
     // between document id and booking
     public static List<BuySellBookingServiceData> parseCorrectBookings(
             List<ConflictTabelRow> validBooking) {
 
+        //DEBUG
+        String logtext="";
+        
         // Booking id mapped to a booking line
         Map<Integer, BuySellBookingServiceData> bookings = new HashMap<>();
         int startBookingNr = AppConstants.getStartBookingNr();
         for (ConflictTabelRow line : validBooking) {
-			// get Octopus Client
+            // get Octopus Client
             // because the client does or will exist in Octopus the client
             // optional info doesn't have to be added
             int factuurnNNr = Integer.parseInt(line
@@ -69,7 +126,7 @@ public class SToABooking {
             String externalClientID = SToAClient.getExternalOctopusID(line
                     .getBookingLineField(BookingLineFields.KlantID));
 
-			// first create a booking if none exists for this factuur nr
+            // first create a booking if none exists for this factuur nr
             // comment is client name
             if (!bookings.containsKey(factuurnNNr)) {
                 bookings.put(
@@ -82,12 +139,14 @@ public class SToABooking {
                                 line.getClientField(ClientFields.Naam),
                                 line.getBookingLineField(BookingLineFields.Referentie)));
                 startBookingNr++;
+                //DEBUG
+                addBookingToLog(logtext,line,bookings.get(factuurnNNr));
             }
 
             // then add the line as booking line to the corresponding booking
             BuySellBookingServiceData booking = bookings.get(factuurnNNr);
 
-			// the reference can be the standard shipping and handling reference
+            // the reference can be the standard shipping and handling reference
             // if so replace this with the imported reference different then the
             // S&A reference
             if (booking.getReference().equals(
@@ -107,11 +166,17 @@ public class SToABooking {
             double amount = 0;
             try {
                 amount = SToAField.parseDouble((line
-                                        .getBookingLineField(BookingLineFields.BoekingBedragExclBTW)));
+                        .getBookingLineField(BookingLineFields.BoekingBedragExclBTW)));
             } catch (NumberFormatException | ParseException ex) {
-               OKNotificationWindow.openError("Booking: "+factuurnNNr+" has an unreadable booking amount. Please close app and change amount into correct format.",false);
+                OKNotificationWindow.openError("Booking: " + factuurnNNr + " has an unreadable booking amount. Please close app and change amount into correct format.", false);
             }
-            double baseAmount = Math.abs(amount);
+            double baseAmount = amount;
+            boolean isCreditNote = false;
+            //if credit note set abs value
+            if (!line.getBookingLineField(BookingLineFields.CreditNotaNummer).equals("")) {
+                isCreditNote = true;
+                baseAmount = Math.abs(amount);
+            }
             double vatAmount = SToABooking.getBookingVatAmount(baseAmount,
                     vatCodeKey);
             int acctKey = Integer.parseInt(line
@@ -121,19 +186,21 @@ public class SToABooking {
                     .getBookingLine(acctKey, baseAmount, vatAmount, vatCodeKey,
                             line.getBookingLineField(BookingLineFields.Referentie) + "; " + line.getClientField(ClientFields.Naam));
 
-            boolean isCreditNote = amount < 0;
-
             // add line to booking and update booking total
             WSDataObjectCreator.addBookingLineToBookingAndUpdateBookingAmount(booking, bookingLine, isCreditNote);
 
         }
-		//recalculate total amount for each booking
 
         //convert to a sorted list
         SortedMap<Integer, BuySellBookingServiceData> sortedBookings = new TreeMap<>();
         for (Map.Entry<Integer, BuySellBookingServiceData> entry : bookings.entrySet()) {
             sortedBookings.put(entry.getValue().getDocumentSequenceNr(), entry.getValue());
+
         }
+        //DEBUG
+        System.out.println("test");
+        System.out.println(logtext);
+        
         return new ArrayList<>(sortedBookings.values());
     }
 
@@ -164,6 +231,8 @@ public class SToABooking {
                 return SToAField.isCountryCode(s);
             case OctopusClient:
                 return SToAField.isNotOptional(s);
+            case CreditNotaNummer:
+                return true;
             default:
                 return SToAField.isNotOptional(s);
         }

@@ -1,0 +1,52 @@
+check mapping of client (details both side)
+first print client info from both sides
+than check the mapping data structure 
+than remove the client mapping and try to add correct
+recheck
+
+mapping between clients should be done by ints not strings
+
+1157 -> 72 (is correctcly mapped but wrong client added, check vat and name of client on both side
+0591 -> 285 (should be 181)
+1787 
+1047
+2174 -> 330 (should be 33)
+
+ De Rijcker Geert
+• Schaeps
+• LCM
+
+further investigate non matching vat number clients
+
+find DEBUG in code
+
+clients which have a vat error mapping cannot be found through getClientByVATNr
+this means that the VAT in the booking is not yet as client in the database
+
+bug is possibly in the code for client ext id generation: 
+an existing client which has no ext id is not given one immediately-> do this
+client id mappings mixes int and string, only int for uniqueness
+
+an additional fix is to check whether clients which have an octopus relation object
+but the mapped client does not have the same id, point to these
+e.g. 
+factuur nr: 172165booking nr: 2717
+Error VAT does not match
+factuur VAT nr: BE0808565868 oct booking VAT nr: FR61507835627
+SF ID: 0557SF mapped Oct ext ID: 33 SF mapped Oct internal ID: 330 
+VAT mapped ext Oct ID: 481 VAT mapped int Oct ID: 308
+ignore the VAT particulier
+this is not always a real error, sometimes btw is simply different but the clients seems
+to be a correct, this could be a typing error which has to be corrected annyway
+, thus the user should be able to set a flag once
+to agree with mismatching vat on a mapping
+
+
+in endbutton add the checkbooking text
+
+change import format of files STOAField, now there is one line for each vat taxation
+
+every booking has a single line-> this needs to be translated in 1 or 2 lines of in octopus
+2 lines is only required if the bookings mixes amounts of both 21 and 6 VAT these need to be seperated
+TODO issue with import of csv non matching length of fields.
+

@@ -34,7 +34,7 @@ public class ConflictTabelRow {
 	}
 
 	// TODO use new set method everywhere
-	public ConflictTabelRow(String[] line, boolean isShipping) {
+	public ConflictTabelRow(String[] line, String BoekingBedragExclBTW) {
 		importFields = line;
 		this.modifiedColumns = new int[line.length + 1];
 		bookingLineFields = new String[BookingLineFields.values().length];
@@ -43,6 +43,8 @@ public class ConflictTabelRow {
 		// ImportFields.FactuurNummer,ImportFields.KlantID,ImportFields.BTWNummer,ImportFields.BoekingBedragExclBTW,
 		initBookingLineField(BookingLineFields.FactuurNummer,
 				getImportField(ImportFields.FactuurNummer));
+                bookingLineFields[BookingLineFields.CreditNotaNummer.ordinal()] = line[ImportFields.CreditNotaNummer
+				.ordinal()];
 		bookingLineFields[BookingLineFields.KlantID.ordinal()] = line[ImportFields.KlantID
 				.ordinal()];
 		bookingLineFields[BookingLineFields.BTWNummer.ordinal()] = line[ImportFields.BTWNummer
@@ -55,19 +57,13 @@ public class ConflictTabelRow {
 				.ordinal()];
 		initBookingLineField(BookingLineFields.Naam,
 				line[ImportFields.Naam.ordinal()]);
-		// if it's a shipping the amount is equal to the shipping price
-		// the reference is already defined message stating that the payment is
-		// a shipping and handling line
-		if (isShipping) {
-			bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = line[ImportFields.ShippingAndHandling
-					.ordinal()];
-			bookingLineFields[BookingLineFields.Referentie.ordinal()] = AppConstants.shippingAndHandlingReference;
-		} else {
-			bookingLineFields[BookingLineFields.Referentie.ordinal()] = line[ImportFields.Referentie
-					.ordinal()];
-			bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = line[ImportFields.BoekingBedragExclBTW
-					.ordinal()];
-		}
+	
+	
+                bookingLineFields[BookingLineFields.Referentie.ordinal()] = line[ImportFields.Referentie
+                                .ordinal()];
+                
+                bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = BoekingBedragExclBTW;
+
 		bookingLineFields[BookingLineFields.NrOfExperitiationDays.ordinal()] = line[ImportFields.NrOfExperitiationDays
 				.ordinal()];
 		// to convert lines
@@ -75,8 +71,8 @@ public class ConflictTabelRow {
 		bookingLineFields[BookingLineFields.OctopusClient.ordinal()] = getExternalClientName(line[ImportFields.KlantID
 				.ordinal()]);
 		String BTWCode = SToAField.getBTWCodeSuggestion(
-				line[ImportFields.BTW6.ordinal()],
-				line[ImportFields.BTW21.ordinal()]);
+				line[ImportFields.BTW6Amount.ordinal()],
+				line[ImportFields.BTW21Amount.ordinal()]);
 		// default btwcode or non existing BTWCode
 		if (BTWCode.equals("00")
 				|| !CacheModel.getVatCodes().containsKey(BTWCode)) {
@@ -102,7 +98,7 @@ public class ConflictTabelRow {
 		bookingLineFields[BookingLineFields.BookingAccountKey.ordinal()] = bookingAccount;
 
 	}
-
+        
 	private String getExternalClientName(String clientID) {
 		RelationServiceData externalClient = SToAClient
 				.getClientFromExtID(SToAClient.getExternalOctopusID(clientID));

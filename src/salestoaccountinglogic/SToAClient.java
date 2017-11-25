@@ -21,7 +21,7 @@ import webcomm.octws.RelationServiceData;
 
 public class SToAClient {
 
-    // key is Import id , value Octopus external id
+    // key is oct id , value sf id
 
     private static Map<String, String> clientsMapping = new HashMap<>();
     // key is Import id , value Octopus external id

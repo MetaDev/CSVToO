@@ -24,11 +24,21 @@ import util.AppUtil;
 
 //Here comes the code concerning, checking, parsing and converting fields
 public class SToAField {
-
+//"Fact nr","Credit nota nr","Client-Auto-ID","Accountnaam","Factuurstraat","Factuurpostcode",
+//"Factuurplaats","Factuurland","BTW","Factuur datum","Vervaldag","Uw ref.",
+//"Verzending en afhandeling","Payment Terms",
+//"Alg. Totaal incl BTW",-> the total amount 
+//"Total BTW - TVA at 6%","Totaal BTW aan 6%", -> the amount calculated with 6 VAT, and the actual amount of VAT
+//"Total BTW - TVA at 21%","Totaal BTW aan 21%", -> same as above, these two need to come on seperate lines
+//"Shipping and Handling BTW - TVA %" the VAT code for shipping and handling, corresponds to the highest amount
+//
     // all fields in order from imported csv with booking lines
     public enum ImportFields {
 
-        FactuurNummer, KlantID, Naam, StraatEnNummer, Postcode, Gemeente, Land, BTWNummer, FactuurDatum, VervalDatum, Referentie, BoekingBedragExclBTW, ShippingAndHandling, NrOfExperitiationDays, BTW6, BTW21
+FactuurNummer,CreditNotaNummer, KlantID, Naam, StraatEnNummer, Postcode, 
+Gemeente, Land, BTWNummer, FactuurDatum, VervalDatum, Referentie, 
+ShippingAndHandlingAmount, NrOfExperitiationDays,
+BoekingBedragInclBTW,BTW6Total,BTW6Amount, BTW21Total,BTW21Amount,ShippingAndHandlingVATCode
     }
 
     public enum VATLiability {
@@ -154,6 +164,13 @@ public class SToAField {
         else if (countryCode.equals("SE")) {
             return BTWNr.matches("^SE[0-9]{12}$");
        }
+        // ESX9999999X
+        else if (countryCode.equals("ES")){
+            return BTWNr.matches("^ES[A-Za-z][0-9]{9}[A-Za-z]$");
+        }
+        else if (countryCode.equals("ES")){
+            return BTWNr.matches("^SI[0-9]{8}$");
+        }
         else if (countryCodeMapping.containsValue(getCountryCodeFromBTWNr(BTWNr))){
             if (!AppConstants.BTWFormatNotSupportedMessage){
                 OKNotificationWindow.openError("Country code found: " + getCountryCodeFromBTWNr(BTWNr)+ " but the BTW format is not supported, contact developper.",true);
@@ -218,7 +235,17 @@ public class SToAField {
                 + String.format("%02d", (cal.get(Calendar.MONTH) + 1));
         return Integer.parseInt(period);
     }
-
+//source OCtopus:https://login.octopus.be/manual/NL/management_relations_import.htm
+    /**
+Omschrijving
+0 Onbekend
+1 Belgische BTW-plichtige
+4 Intracommunautaire BTW-plichtige
+6 BTW-plichtige buiten EU
+7 Particulier Belgie
+8 Particulier EU
+9 Particulier niet EU
+     */
     // return BTWplichtigheid based on BTWnumber
     public static String getBTWPlichtigheid(String BTWNr, String countryName) {
         // particulier

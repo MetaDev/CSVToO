@@ -459,3 +459,14 @@ comment: commande M. Lapierre 11.8; Cap Vital Sante Lyon - Sante et reconfort
 
 
 
+Wed Jun 07 12:23:30 CEST 2017java.lang.ArrayIndexOutOfBoundsException: 1
+	at io.FileHandler.cacheCSVMapping(FileHandler.java:107)
+	at salestoaccountinglogic.SToAClient.init(SToAClient.java:175)
+	at salestoaccountinglogic.SToAConfig.init(SToAConfig.java:6)
+	at gui.window.main.MainWindow.initGUIAndConfig(MainWindow.java:66)
+	at gui.window.main.MainWindow.main(MainWindow.java:32)
+Sat Sep 16 15:15:49 CEST 2017java.lang.NullPointerException
+	at gui.window.config.ChooseBookYearJournalWindow.<init>(ChooseBookYearJournalWindow.java:38)
+	at gui.window.config.LoginWindow.open(LoginWindow.java:75)
+	at gui.window.main.MainWindow.initGUIAndConfig(MainWindow.java:81)
+	at gui.window.main.MainWindow.main(MainWindow.java:32)

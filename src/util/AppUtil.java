@@ -56,13 +56,15 @@ public class AppUtil {
 
 	public static String printRelation(RelationServiceData relation) {
 		String relationDescription = "";
-		relationDescription += "Client " + relation.getName() + " NR "
-				+ relation.getExternalRelationNr() + '\n';
+		relationDescription += "Client " + relation.getName() + " Oct Ext NR "
+				+ relation.getExternalRelationNr() ;
+				
 		relationDescription += "Adress: " + relation.getStreetAndNr() + ", "
 				+ relation.getCity() + " " + relation.getCountry() + '\n';
 		relationDescription += "Info: booking account: "
 				+ relation.getDefaultBookingAccountClient() + "; Vat type: "
-				+ relation.getVatType() + "\n\n";
+				+ relation.getVatType() +
+                                "; VAT nr:"+ relation.getVatNr() +"\n\n";
 		return relationDescription;
 	}
 
@@ -71,6 +73,10 @@ public class AppUtil {
 		bookingDescription += "Booking for "
 				+ SToAClient.getClientFromExtID(
 						booking.getExternalRelationId() + "").getName()
+                        + "with VAT: "+SToAClient.getClientFromExtID(
+						booking.getExternalRelationId() + "").getVatNr()
+                        + "with ext Oct nr: "+
+						booking.getExternalRelationId()
 				+ " with number: " + booking.getDocumentSequenceNr() + '\n';
 		bookingDescription += "date: "
 				+ printXMLCalendar(booking.getDocumentDate())

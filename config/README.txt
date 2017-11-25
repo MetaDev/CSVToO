@@ -1,2 +1,2 @@
-This folder will contain the clientid mapping from Taskforce to Octopus
-As wel as the field ampping between TaskForce and Octopus
+This folder contains all mapping used for suggestion of unknown fields.
+Please don't edit unless you know what you're doing.

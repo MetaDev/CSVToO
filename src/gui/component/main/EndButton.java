@@ -21,6 +21,7 @@ import model.ConflictTabelRow;
 import model.FlushModel;
 import salestoaccountinglogic.SToABooking;
 import salestoaccountinglogic.SToAClient;
+import salestoaccountinglogic.SToAField;
 import util.AppUtil;
 import webcomm.WSAFlush;
 import webcomm.WSCommunicator;
@@ -63,8 +64,10 @@ public class EndButton extends JButton implements ActionListener {
                 return;
             }
         }
+        
         final List<BuySellBookingServiceData> validBookingObjects = SToABooking
                 .parseCorrectBookings(validBookings);
+       
         final Collection<RelationServiceData> validRelationObjects = SToAClient
                 .getToUploadValidRelations();
         String warningText = "Once OK is pressed all change will be saved permenantly.\n"
@@ -86,7 +89,21 @@ public class EndButton extends JButton implements ActionListener {
                 validBookingObjects);
         warningText += AppUtil.printAllClients(relationHeader,
                 validRelationObjects);
+        warningText+="Potentially wrong client maps below.\n";
+        warningText+= "---------------------------\n";
+        warningText+="\n";
 
+        
+       //TODO add checked bookings to warning text , check for unique VAT numbers
+        for ( int i=0; i<validBookingObjects.size(); i++){
+            String checkedString=SToABooking.checkBooking(validBookings.get(i),validBookingObjects.get(i));
+            if (checkedString!=null){
+                warningText+=checkedString;
+                warningText+="\n";
+            }
+        }
+        
+        
         // open warning window asking user confirmation
         if (OKCancelNotificationWindow.open(warningText)) {
             //this new thread complicates the opening of a pop-up window which introduced the newThread argument in the method
@@ -109,7 +126,10 @@ public class EndButton extends JButton implements ActionListener {
                                     // flush
                                     WSCommunicator.loginAndExecute(WSAFlush
                                             .getInstance());
-
+                                    //save all bookings and import lines to log
+                                    //additionally compare vat between import lines and validated bookings
+                                    
+                                  //  AppUtil.saveToLog(logText);
                                     return null;
                                 }
                             };

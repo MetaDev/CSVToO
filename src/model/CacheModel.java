@@ -21,6 +21,7 @@ import webcomm.octws.VatCodeServiceData;
 public class CacheModel {
 
 	private static SortedMap<String, VatCodeServiceData> vatCodes;
+        //the key is the octopus id
 	private static SortedMap<String, AccountServiceData> salesBookingAccounts;
 	// cache all journals of current BookYear
 	// Map these Journal to their respective key

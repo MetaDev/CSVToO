@@ -73,7 +73,7 @@ public class ConflictTabelModel extends DefaultTableModel {
         try {
             return !factuurNr.equals("") && SToAField.parseDouble(amount) != 0;
         } catch (NumberFormatException | ParseException ex) {
-            OKNotificationWindow.openError("Booking: " + factuurNr + " has an unreadable booking amount. Please close app and change amount into correct format.",false);
+            OKNotificationWindow.openError("Booking: " + factuurNr + " has an unreadable booking amount. Please close app and change amount into correct format.", false);
             return false;
         }
     }
@@ -81,17 +81,20 @@ public class ConflictTabelModel extends DefaultTableModel {
     // clone all bookings in here
     // build conflict table rows based on import
     public void setAllRows(List<String[]> allRows) {
+        System.out.println(allRows.get(0).length);
+        System.out.println(ImportFields.values().length);
         // something went wrong with parsing csv
         if (allRows == null || allRows.isEmpty()) {
             OKNotificationWindow
                     .openError("Something went wrong when filling the table with data from the csv file.\n"
-                            + "Please check if your csv file corresponds to all requirements.",false);
+                            + "Please check if your csv file corresponds to all requirements.", false);
             return;
         }
         if (allRows.get(0).length != ImportFields.values().length) {
             OKNotificationWindow
                     .openError("Something went wrong when filling the table with data from the csv file.\n"
-                            + "Your csv has the wrong number of columns.",false);
+                            + "Your csv has the wrong number of columns. Namely" + allRows.get(0).length + 
+                            "and expected was: " + ImportFields.values().length, false);
             return;
         }
 
@@ -102,28 +105,42 @@ public class ConflictTabelModel extends DefaultTableModel {
         for (String[] line : allRows) {
             // only add booking lines with booking nr and with a price > 0
             if (validImportBooking(line[ImportFields.FactuurNummer.ordinal()],
-                    line[ImportFields.BoekingBedragExclBTW.ordinal()])) {
-                // construct an extra row for shipping and handling, once for
-                // every booking nr
-                // if necessary
-                String sAndHPrice = line[ImportFields.ShippingAndHandling
-                        .ordinal()];
+                    line[ImportFields.BoekingBedragInclBTW.ordinal()])) {
+
                 String bookingNr = line[ImportFields.FactuurNummer.ordinal()];
-                //shipping and handling can be credit note thus different from 0
+                //check if two !=0 VAT amounts
+                double VAT6Amount = 0;
+                double VAT21Amount = 0;
                 try {
-                    if (SToAField.parseDouble(sAndHPrice) != 0
-                            && !shippingAndHandlingForBookingNrs
-                            .contains(bookingNr)) {
-                        shippingAndHandlingForBookingNrs.add(bookingNr);
-                        newRow = new ConflictTabelRow(line, true);
-                        newRows.add(newRow);
-                    }
+                    VAT6Amount = SToAField.parseDouble(line[ImportFields.BTW6Amount.ordinal()]);
+                    VAT21Amount = SToAField.parseDouble(line[ImportFields.BTW21Amount.ordinal()]);
                 } catch (NumberFormatException | ParseException ex) {
-                    OKNotificationWindow.openError("Booking: " + bookingNr + " has an unreadable shipping amount. Please close app and change amount into correct format.",false);
+                    Logger.getLogger(ConflictTabelModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                newRow = new ConflictTabelRow(line, false);
-                newRows.add(newRow);
+                //If the line contains both 6 and 21 BTW amounts, split in two lines
+                if (VAT6Amount > 0 && VAT21Amount > 0) {
+                    String[] line6BTW = line.clone();
+                    line6BTW[ImportFields.BTW21Amount.ordinal()] = "0,00";
+                    line6BTW[ImportFields.BTW21Total.ordinal()] = "0,00";
+                    newRow = new ConflictTabelRow(line6BTW, line[ImportFields.BTW6Amount.ordinal()]);
+                    newRows.add(newRow);
+                    
+                    String[] line21BTW = line.clone();
+                    line21BTW[ImportFields.BTW6Amount.ordinal()] = "0,00";
+                    line21BTW[ImportFields.BTW6Total.ordinal()] = "0,00";
+                    newRow = new ConflictTabelRow(line21BTW, line[ImportFields.BTW21Amount.ordinal()]);
+                    newRows.add(newRow);
+                } else {
+                    if (VAT6Amount > 0) {
+                        newRow = new ConflictTabelRow(line, line[ImportFields.BTW6Amount.ordinal()]);
+
+                    }else{
+                        newRow = new ConflictTabelRow(line, line[ImportFields.BTW21Amount.ordinal()]);
+                    }
+                    newRows.add(newRow);
+                }
+
             }
         }
 

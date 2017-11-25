@@ -2327,15 +2327,6 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "pdfDocument", scope = ExportDeliveryNoteResponse.class)
-    public JAXBElement<byte[]> createExportDeliveryNoteResponsePdfDocument(byte[] value) {
-        return new JAXBElement<byte[]>(_ExportRappelResponsePdfDocument_QNAME, byte[].class, ExportDeliveryNoteResponse.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
     @XmlElementDecl(namespace = "", name = "einvoiceXml", scope = ExportInvoiceResponse.class)
     public JAXBElement<byte[]> createExportInvoiceResponseEinvoiceXml(byte[] value) {
         return new JAXBElement<byte[]>(_ExportInvoiceResponseEinvoiceXml_QNAME, byte[].class, ExportInvoiceResponse.class, ((byte[]) value));
@@ -2348,6 +2339,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "pdfDocument", scope = ExportInvoiceResponse.class)
     public JAXBElement<byte[]> createExportInvoiceResponsePdfDocument(byte[] value) {
         return new JAXBElement<byte[]>(_ExportRappelResponsePdfDocument_QNAME, byte[].class, ExportInvoiceResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "pdfDocument", scope = ExportDeliveryNoteResponse.class)
+    public JAXBElement<byte[]> createExportDeliveryNoteResponsePdfDocument(byte[] value) {
+        return new JAXBElement<byte[]>(_ExportRappelResponsePdfDocument_QNAME, byte[].class, ExportDeliveryNoteResponse.class, ((byte[]) value));
     }
 
 }

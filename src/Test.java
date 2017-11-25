@@ -13,6 +13,7 @@ import salestoaccountinglogic.SToABooking;
  */
 public class Test {
     public static void main(String[] a) {
+        
         System.out.println(SToABooking.roundForVATAmount(191.225d));
     }
 
