@@ -93,13 +93,18 @@ public class SToABooking {
         //if client exist
         RelationServiceData test=SToAClient.getClientByVATNr(importVAT);
         
+        
         logtext += "SF ID: " + SFID + "SF mapped Oct ext ID: " + OctID ;
-        logtext+=" SF mapped Oct internal ID: " + SToAClient.getClientFromExtID(OctID).getRelationKey().getId();
+        if (SToAClient.getClientFromExtID(OctID).getRelationKey()!=null){
+            logtext+=" SF mapped Oct internal ID: " + SToAClient.getClientFromExtID(OctID).getRelationKey().getId();
+        }
         logtext+="\n";
         if(test!=null){
             String vatMappedOctID = SToAClient.getClientByVATNr(importVAT).getExternalRelationNr() + "";
             logtext+= " VAT mapped ext Oct ID: " + vatMappedOctID;
-            logtext+= " VAT mapped int Oct ID: " + SToAClient.getClientByVATNr(importVAT).getRelationKey().getId();
+            if (SToAClient.getClientByVATNr(importVAT).getRelationKey()!=null){
+                logtext+= " VAT mapped int Oct ID: " + SToAClient.getClientByVATNr(importVAT).getRelationKey().getId();
+            }
             
         }
         logtext+= "\n";

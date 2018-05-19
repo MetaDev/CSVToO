@@ -184,6 +184,7 @@ public class EditClientWindow extends JPanel {
         client.setFactLanguage(comboBoxClientFields.get(ClientFields.Language)
                 .getSelectedIndex());
         // External ID can't change
+        //only give new ID if the client doesn't already have one
         if(client.getExternalRelationNr()==0){
             client.setExternalRelationNr(SToAClient.getValidExternalID());
         }

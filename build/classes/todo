@@ -50,3 +50,5 @@ every booking has a single line-> this needs to be translated in 1 or 2 lines of
 2 lines is only required if the bookings mixes amounts of both 21 and 6 VAT these need to be seperated
 TODO issue with import of csv non matching length of fields.
 
+save errors in log file
+only print warning of booking if vat doesn't match

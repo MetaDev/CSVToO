@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Harald/Github/CSVToO/src/model/ConflictTabelRow.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/gui/component/custom/EditClientButton.java</file>
             <file>file:/Users/Harald/Github/CSVToO/src/gui/component/main/EndButton.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/model/ConflictTabelRow.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/gui/component/main/StartButton.java</file>
             <file>file:/Users/Harald/Github/CSVToO/src/todo</file>
-            <file>file:/Users/Harald/Github/CSVToO/src/webcomm/WSAFlush.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/model/ConflictTabelModel.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/salestoaccountinglogic/SToAField.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/gui/window/client/ExistingClientWindow.java</file>
             <file>file:/Users/Harald/Github/CSVToO/src/salestoaccountinglogic/SToABooking.java</file>
+            <file>file:/Users/Harald/Github/CSVToO/src/salestoaccountinglogic/SToAClient.java</file>
             <file>file:/Users/Harald/Github/CSVToO/src/gui/window/client/EditClientWindow.java</file>
             <file>file:/Users/Harald/Github/CSVToO/src/pw</file>
         </group>

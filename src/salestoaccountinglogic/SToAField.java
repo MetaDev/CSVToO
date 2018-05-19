@@ -171,6 +171,9 @@ BoekingBedragInclBTW,BTW6Total,BTW6Amount, BTW21Total,BTW21Amount,ShippingAndHan
         else if (countryCode.equals("ES")){
             return BTWNr.matches("^SI[0-9]{8}$");
         }
+         else if (countryCode.equals("IT")){
+            return BTWNr.matches("^IT[0-9]{11}$");
+        }
         else if (countryCodeMapping.containsValue(getCountryCodeFromBTWNr(BTWNr))){
             if (!AppConstants.BTWFormatNotSupportedMessage){
                 OKNotificationWindow.openError("Country code found: " + getCountryCodeFromBTWNr(BTWNr)+ " but the BTW format is not supported, contact developper.",true);
@@ -222,6 +225,11 @@ BoekingBedragInclBTW,BTW6Total,BTW6Amount, BTW21Total,BTW21Amount,ShippingAndHan
             return number.doubleValue();
         }
         return (double) 0;
+
+    }
+    public static String doubleToString(double d){
+        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+        return format.format(d);
 
     }
 

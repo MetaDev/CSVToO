@@ -34,7 +34,8 @@ public class ConflictTabelRow {
 	}
 
 	// TODO use new set method everywhere
-	public ConflictTabelRow(String[] line, String BoekingBedragExclBTW) {
+	public ConflictTabelRow(String[] line, double BoekingBedragExclBTW) {
+                System.out.println("boeking bedrag"+BoekingBedragExclBTW);
 		importFields = line;
 		this.modifiedColumns = new int[line.length + 1];
 		bookingLineFields = new String[BookingLineFields.values().length];
@@ -62,7 +63,7 @@ public class ConflictTabelRow {
                 bookingLineFields[BookingLineFields.Referentie.ordinal()] = line[ImportFields.Referentie
                                 .ordinal()];
                 
-                bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = BoekingBedragExclBTW;
+                bookingLineFields[BookingLineFields.BoekingBedragExclBTW.ordinal()] = SToAField.doubleToString(BoekingBedragExclBTW);
 
 		bookingLineFields[BookingLineFields.NrOfExperitiationDays.ordinal()] = line[ImportFields.NrOfExperitiationDays
 				.ordinal()];

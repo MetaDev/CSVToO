@@ -82,6 +82,7 @@ public class ConflictTabelModel extends DefaultTableModel {
     // build conflict table rows based on import
     public void setAllRows(List<String[]> allRows) {
         System.out.println(allRows.get(0).length);
+        System.out.println(allRows.get(0)[ImportFields.BoekingBedragInclBTW.ordinal()]);
         System.out.println(ImportFields.values().length);
         // something went wrong with parsing csv
         if (allRows == null || allRows.isEmpty()) {
@@ -109,34 +110,58 @@ public class ConflictTabelModel extends DefaultTableModel {
 
                 String bookingNr = line[ImportFields.FactuurNummer.ordinal()];
                 //check if two !=0 VAT amounts
-                double VAT6Amount = 0;
-                double VAT21Amount = 0;
+               
+                //when the shipping vat code is 6 add shipping to 6 idem 21 and 0
+                int shippingVTA = Integer.parseInt(line[ImportFields.ShippingAndHandlingVATCode.ordinal()]);
+                double shippingAmount =0;
+                double TotalVATShipping=0;
+                double VAT6Total =0;
+                double VAT21Total =0;
+                //TODO check whether the amoount or total is used to check for vat type
+                double VAT6Only=0;
+                double VAT21Only=0;
+
                 try {
-                    VAT6Amount = SToAField.parseDouble(line[ImportFields.BTW6Amount.ordinal()]);
-                    VAT21Amount = SToAField.parseDouble(line[ImportFields.BTW21Amount.ordinal()]);
+                    VAT6Only=SToAField.parseDouble(line[ImportFields.BTW6Amount.ordinal()]);
+                    VAT21Only=SToAField.parseDouble(line[ImportFields.BTW21Amount.ordinal()]);
+                    VAT6Total = SToAField.parseDouble(line[ImportFields.BTW6Total.ordinal()]);
+                    VAT21Total = SToAField.parseDouble(line[ImportFields.BTW21Total.ordinal()]);
+                    TotalVATShipping=SToAField.parseDouble(line[ImportFields.BoekingBedragInclBTW.ordinal()]);
+                    shippingAmount = SToAField.parseDouble(line[ImportFields.ShippingAndHandlingAmount.ordinal()]);
+                    
                 } catch (NumberFormatException | ParseException ex) {
                     Logger.getLogger(ConflictTabelModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                System.out.println("total6 before shiping"+VAT6Total);
+                VAT6Total+= shippingVTA==6 ? shippingAmount:0;
+                VAT21Total+= shippingVTA==21 ? shippingAmount:0;
+                System.out.println(line[ImportFields.FactuurNummer.ordinal()]+ ": "+VAT6Total + "  "+ VAT21Total);
+                System.out.println("shippign amount"+shippingAmount);
+                System.out.println("vat only 6"+ VAT6Only);
+                System.out.println("vat only 21"+ VAT21Only);
                 //If the line contains both 6 and 21 BTW amounts, split in two lines
-                if (VAT6Amount > 0 && VAT21Amount > 0) {
+                if (VAT6Only != 0 && VAT21Only != 0) {
+                    
                     String[] line6BTW = line.clone();
                     line6BTW[ImportFields.BTW21Amount.ordinal()] = "0,00";
                     line6BTW[ImportFields.BTW21Total.ordinal()] = "0,00";
-                    newRow = new ConflictTabelRow(line6BTW, line[ImportFields.BTW6Amount.ordinal()]);
+                    newRow = new ConflictTabelRow(line6BTW, VAT6Total);
                     newRows.add(newRow);
                     
                     String[] line21BTW = line.clone();
                     line21BTW[ImportFields.BTW6Amount.ordinal()] = "0,00";
                     line21BTW[ImportFields.BTW6Total.ordinal()] = "0,00";
-                    newRow = new ConflictTabelRow(line21BTW, line[ImportFields.BTW21Amount.ordinal()]);
+                    newRow = new ConflictTabelRow(line21BTW, VAT21Total);
                     newRows.add(newRow);
                 } else {
-                    if (VAT6Amount > 0) {
-                        newRow = new ConflictTabelRow(line, line[ImportFields.BTW6Amount.ordinal()]);
+                    if (VAT6Only != 0) {
+                        newRow = new ConflictTabelRow(line, VAT6Total);
 
+                    }else if (VAT21Only != 0){
+                        newRow = new ConflictTabelRow(line, VAT21Total);
                     }else{
-                        newRow = new ConflictTabelRow(line, line[ImportFields.BTW21Amount.ordinal()]);
+                        //both VAT amounts are equal to 0
+                        newRow = new ConflictTabelRow(line,TotalVATShipping );
                     }
                     newRows.add(newRow);
                 }
